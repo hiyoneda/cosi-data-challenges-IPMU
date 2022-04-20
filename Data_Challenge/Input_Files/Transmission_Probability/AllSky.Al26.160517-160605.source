@@ -1,0 +1,37 @@
+# Simulation of Al-26 for 160517-160605 (10 detector part of 2016 flight)
+# Using COMPTEL map
+Version         1
+Geometry        $(MEGALIB)/massmodel_2016_GRB160530A/COSI.DetectorHead.geo.setup
+
+# Physics list
+PhysicsListEM                        LivermorePol
+PhysicsListEMActivateFluorescence    false
+
+
+# Output formats
+StoreSimulationInfo                  all
+
+
+# The run, with the instrument moving around in Galactic coordinates, 
+# a fixed point source in Galactic coordinates, and
+# a background symmetric in local coordinates
+
+Run MyRun
+MyRun.FileName                  AllSky.Al26.160517-160605
+# last time in ori file below + 0.1 s
+MyRun.Time                      1465171212.9
+# The detector rotates in the Galactic coordiante system as given in the ori file.
+MyRun.OrientationSky            Galactic File NoLoop /volumes/eos/users/jacqueline/analysis/Al26/DIRBE/AllData_160517-160605_506-516keV.ori
+
+# The all-sky source
+MyRun.Source MySource
+MySource.ParticleType                         1
+# The beam is a far field map of fluxes
+# and will be rotated into the position given in the orientation keyword, in this case it will be mapped onto Galactioc coordiantes
+MySource.Beam                                 FarFieldNormalizedEnergyBeamFluxFunction $(MEGALIB)/resource/examples/advanced/AllSky/AllSky_Al26_NormInnerGalaxyDiehl_26-Al_COMPTEL.dat
+# The orientation of the source in Galactic coordiantes, the Galactic pole is up -this is the default for FarFieldNormalizedEnergyBeamFluxFunction
+MySource.Orientation                          Galactic Fixed 90 180
+MySource.Spectrum                             NormalizedEnergyBeamFluxFunction
+MySource.FarFieldTransmissionProbability      /volumes/eos/users/jacqueline/analysis/Al26/DIRBE/TransmissionProbability_33000.dat
+
+

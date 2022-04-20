@@ -1,0 +1,42 @@
+Version 1
+
+## Indicate your mass model here (maybe the one corresponding to our GRB in flight?)
+Geometry /home/jacqueline/MEGAlib/massmodel_2016_GRB160530A/COSI.DetectorHead.geo.setup
+
+PhysicsListEM				LivermorePol
+PhysicsListEMActivateFluorescence   	false
+StoreCalibrated				true
+StoreSimulationInfoIonization   	false
+StoreOnlyTriggeredEvents   		true
+DiscretizeHits   			true
+StoreSimulationInfo   			init-only
+
+## Name your run
+Run LingBG_160612_Run
+LingBG_160612_Run.Filename LingBG_160612
+
+## Indicate the last time in the orientation file below + 0.1 s (adding an extra 0.1 s just for completeness)
+LingBG_160612_Run.Time 1465776070.7
+
+## Indicate the orientation file which traces your desired observation
+LingBG_160612_Run.OrientationSky Galactic File NoLoop OP_160612_506-516keV.ori
+
+LingBG_160612_Run.Source BGContinuum
+LingBG_160612_Run.Source BGCosmic
+LingBG_160612_Run.Source BGFive11
+
+## Indicate the three .cosimadat files with NRLMSISE information
+BGContinuum.ParticleType 1
+BGContinuum.Beam FarFieldNormalizedEnergyBeamFluxFunction ling_continuum_33.500_km_00_160612_14-15UTC.cosimadat
+BGContinuum.Spectrum NormalizedEnergyBeamFluxFunction
+
+BGCosmic.ParticleType 1
+BGCosmic.Beam FarFieldNormalizedEnergyBeamFluxFunction ling_cosmic_33.500_km_00_160612_14-15UTC.cosimadat
+BGCosmic.Spectrum NormalizedEnergyBeamFluxFunction
+
+BGFive11.ParticleType 1
+BGFive11.Beam FarFieldNormalizedEnergyBeamFluxFunction ling_511_33.500_km_00_160612_14-15UTC.cosimadat
+BGFive11.Spectrum NormalizedEnergyBeamFluxFunction
+
+
+
