@@ -1,0 +1,25 @@
+# The follwoing values are from Skinner+14 (Table 1).
+DataChallenge.Source CentralPointSource
+DataChallenge.Source NarrowGaussian
+DataChallenge.Source BroadGaussian
+
+CentralPointSource.ParticleType       1
+CentralPointSource.Beam               FarFieldPointSource 0 0
+CentralPointSource.Orientation	      Galactic Fixed 0 0
+CentralPointSource.Spectrum           Mono 511
+CentralPointSource.Flux               0.00012
+CentralPointSource.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat
+
+NarrowGaussian.ParticleType           1
+NarrowGaussian.Beam                   FarFieldGaussian 0 0 2.5
+NarrowGaussian.Orientation            Galactic Fixed 0 0
+NarrowGaussian.Spectrum               Mono 511
+NarrowGaussian.Flux                   0.00028
+NarrowGaussian.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat
+
+BroadGaussian.ParticleType            1
+BroadGaussian.Beam                    FarFieldGaussian 0 0 8.7
+BroadGaussian.Orientation             Galactic Fixed 0 0
+BroadGaussian.Spectrum                Mono 511
+BroadGaussian.Flux                    0.00073
+BroadGaussian.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

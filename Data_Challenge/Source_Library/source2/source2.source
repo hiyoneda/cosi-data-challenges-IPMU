@@ -1,7 +1,0 @@
-DataChallenge.Source          source2
-source2.ParticleType               1
-source2.Beam                       FarFieldPointSource 0 0
-source2.Orientation                Galactic Fixed -30 270
-source2.Spectrum                   File /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Source_Library/source2/source2_spec.dat
-source2.Flux                       1
-source2.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

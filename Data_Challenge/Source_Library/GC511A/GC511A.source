@@ -1,0 +1,8 @@
+# The follwoing values are from Knoedlseder+05.
+DataChallenge.Source AsymmetricGaussian
+AsymmetricGaussian.ParticleType           1
+AsymmetricGaussian.Beam                   FarFieldAssymetricGaussian 0 0 3.5 3.1 0
+AsymmetricGaussian.Orientation            Galactic Fixed 0.1 -0.6
+AsymmetricGaussian.Spectrum               Mono 511
+AsymmetricGaussian.Flux                   1.1e-3
+AsymmetricGaussian.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

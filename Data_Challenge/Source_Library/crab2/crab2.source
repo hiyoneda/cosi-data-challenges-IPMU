@@ -1,0 +1,7 @@
+DataChallenge.Source          crab2
+crab2.ParticleType               1
+crab2.Beam                       FarFieldPointSource 0 0
+crab2.Orientation                Galactic Fixed 10.0 270.0
+crab2.Spectrum                   File /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Source_Library/crab2/crab2_spec.dat
+crab2.Flux                       0.048977
+crab2.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

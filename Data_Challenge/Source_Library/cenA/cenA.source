@@ -3,5 +3,5 @@ cenA.ParticleType               1
 cenA.Beam                       FarFieldPointSource 0 0
 cenA.Orientation                Galactic Fixed 19.417 309.516
 cenA.Spectrum                   File /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Source_Library/cenA/cenA_spec.dat
-cenA.Flux                       0.003524
+cenA.Flux                       0.003609
 cenA.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

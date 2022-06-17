@@ -87,7 +87,7 @@ class RunDataChallenge:
                 print(master_name_list)
                 print()
                 sys.exit()
-        
+
         ##########################   
 
         # Print source list:      
@@ -183,9 +183,19 @@ class RunDataChallenge:
 
         # Change to output directory:
         os.chdir("Output")
-
+    
+        # Remove output file if it already exists (for rerunning option):
+        if os.path.exists("output.evta.gz"):
+            os.system("rm output.evta.gz nuclearizer_terminal_output.txt")
+        
         # Define input sim file:
         sim_file = self.name + ".inc1.id1.sim.gz"
+
+        # Make sure input sim file exists:
+        if os.path.exists(sim_file) == False:
+            print("ERROR: The input file needed for nuclearizer does not exist.") 
+            print("Exiting Code!")
+            sys.exit()
 
         # Run revan:
         if config_file != "none":
@@ -224,12 +234,23 @@ class RunDataChallenge:
         # Change to output directory:
         os.chdir("Output")
 
+        # Remove output file if it already exists (option for rerunning):
+        tra_file_name = self.name + ".inc1.id1.tra.gz"
+        if os.path.exists(tra_file_name):
+            os.system("rm %s revan_terminal_output.txt" %tra_file_name)
+
         # Define input sim file:
         if self.run_nuc == False:
             sim_file = self.name + ".inc1.id1.sim.gz"
         if self.run_nuc == True:
             sim_file = "output.evta.gz" # depends on name in nuclearizer configuration file!
-
+            
+        # Make sure input sim file exists:
+        if os.path.exists(sim_file) == False:
+            print("ERROR: The input file needed for revan does not exist.")
+            print("Exiting code!")
+            sys.exit()
+        
         # Run revan:
         if config_file != "none":
 
@@ -242,7 +263,6 @@ class RunDataChallenge:
     
         # Zip output tra file and change name if running nuclearizer:
         if self.run_nuc == True:
-            tra_file_name = self.name + ".inc1.id1.tra.gz"
             #os.system("gzip output.tra") # depends on name in nuclearizer configuration file!
             os.system("mv output.tra.gz %s" %tra_file_name)
         
@@ -310,7 +330,7 @@ class RunDataChallenge:
             # Extract events:
             os.system("mimrec -g %s -c %s -f %s -x -o %s -n \
                     | tee mimrec_events_terminal_output.txt" %(self.geo_file, config_file, tra_file, output_events))
-                 
+            
             # Make spectrum:
             os.system("mimrec -g %s -c %s -f %s -s -o %s -n \
                     | tee mimrec_spectrum_terminal_output.txt" %(self.geo_file, config_file, tra_file, output_spec))
@@ -350,7 +370,7 @@ class RunDataChallenge:
             extract_spectrum_file = os.path.join(self.dc_dir,"Data_Challenge/Run_Data_Challenge/ExtractSpectrum.cxx")
             os.system("root -q -b %s" %extract_spectrum_file)
 
-            # Extract light curve  histogram:
+            # Extract light curve histogram:
             extract_lc_file = os.path.join(self.dc_dir,"Data_Challenge/Run_Data_Challenge/ExtractLightCurve.cxx")
             os.system("root -q -b %s" %extract_lc_file)
         

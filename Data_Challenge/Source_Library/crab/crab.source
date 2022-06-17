@@ -3,5 +3,5 @@ crab.ParticleType               1
 crab.Beam                       FarFieldPointSource 0 0
 crab.Orientation                Galactic Fixed -5.78 184.56
 crab.Spectrum                   File /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Source_Library/crab/crab_spec.dat
-crab.Flux                       0.047995
+crab.Flux                       0.048977
 crab.FarFieldTransmissionProbability  /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

@@ -1,0 +1,7 @@
+DataChallenge.Source Al26_10xFlux
+
+Al26_10xFlux.ParticleType 1
+Al26_10xFlux.Beam FarFieldNormalizedEnergyBeamFluxFunction /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Source_Library/Al26_10xFlux/scaled_10x_AllSky_Al26_NormInnerGalaxyDiehl_DIRBE240um.dat
+Al26_10xFlux.Spectrum NormalizedEnergyBeamFluxFunction
+Al26_10xFlux.Orientation Galactic Fixed 90 180
+Al26_10xFlux.FarFieldTransmissionProbability /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat
