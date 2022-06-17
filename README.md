@@ -16,7 +16,7 @@ The main purpose of this repository is to simulate the all-sky data that will be
 The schematic below shows the directory structure. Full installation instructions and a quickstart guide are given below. The turquoise boxes represent directories, and the blue boxes represent the contents of the given directory. The main directory (**Data_Challenge**) is provided above.  
 
 <p align="center">
-<img width="700"  src="Images/directory_structure_schematic.png">
+<img width="700"  src="Images/directory_structure_schematic_new.png">
 </p>
 
 ## Available Sources for Simulations <br />
