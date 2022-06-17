@@ -55,7 +55,7 @@ LingBG <br />
      
   - Note: the default transmission probability file is calculated for 33 km.
      
-3. The Helper_Functions directory contains all the scripts needed to run the code </b> 
+3. The Examples directory contains all the scripts needed to run the code </b> 
   - For any new analysis (assuming you added your path), copy the following files to a new analysis directory: client_code.py, inputs.yaml, run_parallel_sims.py, and submit_jobs.py.
 
 4. Specify inputs in inputs.yaml </b>
@@ -75,7 +75,7 @@ LingBG <br />
   - Run: python run_parallel_sims.py.  
   - After all the jobs finish, change directory to Main_Output, uncomment just the mimrec function in the client code, then run: python submit_jobs.py.
  
-7. Note that the helper functions are essentially starting templates for running the module. They may need to be modified.
+7. Note that the scripts found in the Examples directory are starting templates for running the module. They may need to be modified.
 
 </pre>
 
