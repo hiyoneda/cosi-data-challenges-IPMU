@@ -1,0 +1,7 @@
+DataChallenge.Source GalIC
+
+GalIC.ParticleType 1
+GalIC.Beam FarFieldNormalizedEnergyBeamFluxFunction /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Source_Library/GalIC/GalacticDiffuse_IC.dat
+GalIC.Spectrum NormalizedEnergyBeamFluxFunction
+GalIC.Orientation Galactic Fixed 90 180
+GalIC.FarFieldTransmissionProbability /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Setup/../Input_Files/Transmission_Probability/TransmissionProbability_33000.dat

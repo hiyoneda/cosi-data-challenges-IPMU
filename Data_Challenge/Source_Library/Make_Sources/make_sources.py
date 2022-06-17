@@ -9,11 +9,11 @@ import matplotlib.pyplot as plt
 from fermi_srcs import FermiSources
 
 # Source energy range for main data challenge: 8 keV - 50 MeV.
-# Source energy range for preliminary data challenge: 100 keV - 2 MeV 
+# Source energy range for preliminary data challenge: 100 keV - 10 MeV 
 # Note: COSI range: 0.2 - 5 MeV 
 # Include padding above and below to account for energy dispersion.
 power_low = 2 # 100 keV
-power_high = np.log10(2e3) # 2 MeV
+power_high = np.log10(1e4) # 10 MeV
 energy_range = np.logspace(power_low,power_high,50) # keV
 elow = 10**power_low
 ehigh = 10**power_high
@@ -58,11 +58,6 @@ def make_spec_file(src_name, src_energy, src_flux, intg):
 f = open("../master_source_list.txt","w")
 f.write("[\n")
 
-#################
-#sources 1 and 2, used for testing:
-f.write(str(["source1","ps",30,270,1]) + ",\n")
-f.write(str(["source2","ps",-30,270,1]) + ",\n")
-
 ##################
 #crab:
 src_name = "crab"
@@ -93,6 +88,30 @@ print()
 make_spec_file(src_name, energy_range, crab_photons, intg)
 f.write(str([src_name,src_type,gal_b,gal_l,intg]) + ",\n")
 ##################
+
+##################
+#crab2 (for testing):
+src_name = "crab2"
+src_type = "ps"
+gal_l = 270.0
+gal_b = 10.0
+
+#spectrum:
+band = Band(amplitude=7.52e-4,E_peak=5.31,alpha=-1.99,beta=-2.32) #note: E_0 = 531 keV, which is the break energy, E_0 = E_peak/(2-alpha)
+crab_energy,crab_photons = band.PhotonSpectrum(Energy=energy_range)
+crab_func = interp1d(crab_energy,crab_photons,kind="linear",bounds_error=False,fill_value="extrapolate")
+
+#integrated flux for source file:
+intg = integrate.quad(crab_func,elow,ehigh)[0]
+intg = float("{:.6f}".format(intg))
+print()
+print("Crab2 flux between %s keV - %s keV [ph/cm^2/s]: " %(str(elow),str(ehigh)) + str(intg))
+print()
+
+make_spec_file(src_name, energy_range, crab_photons, intg)
+f.write(str([src_name,src_type,gal_b,gal_l,intg]) + ",\n")
+##################
+
 
 ##################
 #cen A (from HESS+LAT 2018)
@@ -210,7 +229,47 @@ f.write(str([src_name,src_type,gal_b,gal_l,intg]) + ",\n")
 src_name = "DataChallenge1"
 src_type = "include"
 src_list = ['crab', 'cenA', 'vela', 'cygX1']
-f.write(str([src_name,src_type,src_list]) + "\n")
+f.write(str([src_name,src_type,src_list]) + ",\n")
+
+##############
+# Ling BG:
+src_list = ['LingBG','LingBG']
+f.write(str(src_list) + ",\n")
+
+##############
+# Al26:
+src_list = ['Al26','diffuse','AllSky_Al26_NormInnerGalaxyDiehl_DIRBE240um.dat']
+f.write(str(src_list) + ",\n")
+
+##############
+# Al26_10xFlux:
+src_list = ['Al26_10xFlux','diffuse','scaled_10x_AllSky_Al26_NormInnerGalaxyDiehl_DIRBE240um.dat']
+f.write(str(src_list) + ",\n")
+
+##############
+# GalIC:
+src_list = ['GalIC','diffuse','GalacticDiffuse_IC.dat']
+f.write(str(src_list) + ",\n")
+
+##############
+# GalBrem:
+src_list = ['GalBrem','diffuse','GalacticDiffuse_Brem.dat']
+f.write(str(src_list) + ",\n")
+
+##############
+# GC 511A
+src_list = ['GC511A', 'GC511']
+f.write(str(src_list) + ",\n")
+
+##############
+# GC 511A_10xFlux
+src_list = ['GC511A_10xFlux', 'GC511']
+f.write(str(src_list) + ",\n")
+
+##############
+# GC 511B
+src_list = ['GC511B', 'GC511']
+f.write(str(src_list) + "\n")
 
 # Close master source list:
 f.write("]")
