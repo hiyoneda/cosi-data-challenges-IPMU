@@ -4,7 +4,7 @@
 The data challenge module requires the MEGAlib code, available [here](http://megalibtoolkit.com/home.html). Among other things, MEGAlib simulates the emission from any (MeV) gamma-ray source, simulates the instrument response, performs the event reconstruction, and performs the high-level data analysis. See the above link for more details regarding the MEGAlib package.   
 
 ## Getting Help <br />
-For any help/problems with running the data challenge module please contact me at: ckarwin@clemson.edu. 
+For any help/problems with running the data challenge module please contact Chris Karwin at: ckarwin@clemson.edu. 
 
 ## Data Products <br />
 All final data products for the data challenge are available on the COSI sftp account.
@@ -13,11 +13,28 @@ All final data products for the data challenge are available on the COSI sftp ac
 The main purpose of this repository is to simulate the all-sky data that will be observed by COSI. The primary code in this folder is **run_data_challenge_module.py**, which can be called with **client_code.py**, with the main input parameters passed via **inputs.yaml**. Additionally, parallel simulations with different time bins can be ran using **run_parellel_sims.py**. The modules can be ran directly from the command line, or submitted to a batch system, which allows them to be easily employed for generating multiple/long simulations. 
 
 ## Directory Structure <br />
-The schematic below shows the directory structure. Full installation instructions and a quickstart guide are given below. The turquoise boxes represent directories, and the blue boxes represent the contents of the given directory. The main directory (**Data_Challenge**) is provided above.  
+The schematic below shows the directory structure. Full installation instructions and a quickstart guide are given below. The main directory (**Data_Challenge**) is provided above.  
 
-<p align="center">
-<img width="700"  src="Images/directory_structure_schematic_new.png">
-</p>
+```mermaid
+%%{init: {'theme':'default'}}%%
+graph TD;
+    A[Data_Challenge] --- B[Setup] & C[Input_Files] & D[Run_Data_Challenge] & E[Source_Library<br>master_source_list.txt] & F[Examples];
+    B --- Ba(setup.py);
+    C --- Ca["Orientation_Files"];
+    C --- Cb[Geometry_Files];
+    C --- Cd[Configuration_Files];
+    C --- Ce["Transmission_Probability"];
+    D --- Da(run_data_challenge.py<br>make_orientation_bins.py<br>ExtractImage.cxx<br>ExtractLightCurve.cxx<br>ExtractSpectrum.cxx);
+    E --- Ea[Source1];
+    E --- Eb[Source2];
+    E --- Ec[SourceN];
+    E --- Ed[Make_Sources];
+    Ea --- Eaa(source1.source<br>source1_spec.dat<br>source1_LC.dat<br>source1_pol.dat);
+    Eb --- Ebb(source2.source<br>source2_spec.dat<br>source2_LC.dat<br>source2_pol.dat);
+    Ec --- Ecc(sourceN.source<br>sourceN_spec.dat<br>sourceN_LC.dat<br>sourceN_pol.dat);
+    Ed --- Edd(make_sources.py);
+    F --- Fa(inputs.yaml<br>client_code.py<br>run_parallel_sims.py<br>submit_jobs.py);
+```
 
 ## Available Sources for Simulations <br />
 The simulated sources are passed via the inputs.yaml file. The following sources are available:
