@@ -60,9 +60,8 @@ LingBG <br />
 2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py, run_sims.py, run_parallel_sims.py, and submit_jobs.py.
      
 3. Specify inputs in inputs.yaml </b>
-  - For the orientation file use: AllData.ori found in full/path/cosi-data-challenges/Input_Files/Orientation_Files/COSI_2016_Balloon_Flight
-
-4. python run_setup.py
+  
+4. Run: python run_setup.py
   
 5. To run the code:  </b>
   - Uncomment the functions inside the client code that you want to run.
