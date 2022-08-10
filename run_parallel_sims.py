@@ -11,8 +11,8 @@ from run_data_challenge_module import RunDataChallenge
 instance = RunDataChallenge("inputs.yaml")
 name = instance.name
 orientation_file = instance.orientation_file
-num_sims = inputs["num_sims"]
-clear = inputs["clear_sims"]
+num_sims = instance.num_sims 
+clear = instance.clear_sims 
 
 # Make orientation time bins:
 # Note: the function returns 0 or 1 depending if an extra file is needed (see for loop below).
