@@ -1,0 +1,15 @@
+[
+'crab',
+'cenA', 
+'vela', 
+'cygX1', 
+'LingBG', 
+'Al26', 
+'Al26_10xFlux', 
+'GalIC', 
+'GalBrem', 
+'GC511A',
+'GC511A_10xFlux',
+'GC511B',
+'OrthoPs'
+]

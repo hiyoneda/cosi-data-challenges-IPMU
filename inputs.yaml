@@ -1,0 +1,39 @@
+#----------#
+# Full path to cosi-data-challenges directory:
+dc_dir: "/full/path/cosi-data-challenges" 
+
+# Full path to run directory:
+run_dir: "/full/path/your_run"
+
+# Full path to geometry file:
+geometry_file: "/full/path/COSI.DetectorHead.geo.setup" 
+
+# Full path to orientation file:
+orientation_file: "/full/path/GalacticScan.ori"
+
+# Transmission probability:
+include_transmission_prob: True # True or False
+transmission_prob_file: "/full/path/TransmissionProbability_33000.dat"
+
+# Full paths to configuration files:
+# Note: if no configuration file use "none"
+nuc_config: "/full/path/ContinuumResponse_cori_v1v2.nuclearizer.cfg"
+revan_config: "/full/path/ContinuumResponse_cori_v1v2_nuclearizer_12Det_200812_imaging_atmos_9Det_6deg_10ebins.revan.cfg"
+mimrec_config: "/full/path/ContinuumResponse_cori_v1v2_nuclearizer_12Det_200812_imaging_atmos_9Det_6deg_10ebins.mimrec.cfg"
+
+# Sources to be simulated:
+src_list: ["crab"]
+
+name: "GalacticScan" # Name of run.
+time: 1467477167.821758700 # Exposure time in seconds.
+
+# Whether or not to run the nuclearizer.
+# Note: nuclearizer is needed for 2016 COSI balloon data. 
+run_nuc: True
+
+# For running parallel time bins (using run_parallel_sims.py):
+parallel_time_sims: True # True or False
+num_sims: 200 # Number of time bins to use:
+clear_sims: True # Remove existing simulation directories
+#----------#
+
