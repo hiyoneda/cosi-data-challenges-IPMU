@@ -56,9 +56,6 @@ class RunDataChallenge:
         # Need to update name of orientation file if running parallel time sims:
         if self.parallel_time_sims == True:
             self.orientation_file = "GalacticScan.ori"
-            print()
-            print("parallel_time_sims is set to True") 
-            print()
 
     def define_sim(self):
 
