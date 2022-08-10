@@ -57,11 +57,12 @@ LingBG <br />
   - It's advised to add the Run_Data_Challenge directory to your python path.
   - Note: This repository does not include the geometery file. 
 
-2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py, run_sims.py, run_parallel_sims.py, and submit_jobs.py.
+2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py
      
 3. Specify inputs in inputs.yaml </b>
   
-4. Setup source directory: python run_setup.py
+4. Run setup script: python run_setup.py
+  - This will setup the source directory and copy all needed files for running the code.
   
 5. To run the code:  </b>
   - Uncomment the functions inside the client code that you want to run.
