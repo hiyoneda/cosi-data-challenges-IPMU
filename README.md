@@ -61,7 +61,7 @@ LingBG <br />
      
 3. Specify inputs in inputs.yaml </b>
   
-4. Run: python run_setup.py
+4. Setup source directory: python run_setup.py
   
 5. To run the code:  </b>
   - Uncomment the functions inside the client code that you want to run.
