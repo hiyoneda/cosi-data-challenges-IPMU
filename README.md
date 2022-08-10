@@ -52,39 +52,31 @@ LingBG <br />
 
 ## Quickstart Guide <br /> 
 <pre>
-1. Download Data_Challenge directory:
+1. Download cosi-data-challenges directory:
   - git clone https://github.com/ckarwin/COSI.git
   - It's advised to add the Run_Data_Challenge directory to your python path.
   - Note: This repository does not include the geometery file. 
 
-2. Setup source library with proper paths:
+2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py, run_sims.py, run_parallel_sims.py, and submit_jobs.py.
      
-     cd full/path/Data_Challenge/Setup
-     python setup.py
-     
-  - Note: the default transmission probability file is calculated for 33 km.
-     
-3. The Examples directory contains all the scripts needed to run the code </b> 
-  - For any new analysis (assuming you added your path), copy the following files to a new analysis directory: client_code.py, inputs.yaml, run_parallel_sims.py, and submit_jobs.py.
+3. Specify inputs in inputs.yaml </b>
+  - For the orientation file use: AllData.ori found in full/path/cosi-data-challenges/Input_Files/Orientation_Files/COSI_2016_Balloon_Flight
 
-4. Specify inputs in inputs.yaml </b>
-  - For the orientation file use: AllData.ori found in full/path/Data_Challenge/Input_Files/Orientation_Files/COSI_2016_Balloon_Flight
+4. python run_setup.py
   
 5. To run the code:  </b>
   - Uncomment the functions inside the client code that you want to run.
-  - Note: configuration files are specified in the client code and can be found in full/path/Data_Challenge/Input_Files/Configuration_Files/Data_Challenges/Data_Challenge_1
   - The code can be ran directly from the terminal or submitted to a batch system.
   - To run from the terminal use python client_code.py.
   - To run parallel jobs in cosima with numerous time bins use python run_parallel_sims.py. 
   - To run a single job in cosima with one time bin use python submit_jobs.py. 
 
 6. If running parallel jobs:
-  - Need to specify name, orientation_file, and num_sims in run_parallel_sims.py. 
   - In the client code uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
   - After all the jobs finish, change directory to Main_Output, uncomment just the mimrec function in the client code, then run: python submit_jobs.py.
  
-7. Note that the scripts found in the Examples directory are starting templates for running the module. They may need to be modified.
+7. Note that the submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's batch system.
 
 </pre>
 
