@@ -57,7 +57,7 @@ LingBG <br />
   - Add the Run_Data_Challenge directory to your python path.
   - Note: This repository does not include the geometery file. 
 
-2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py
+2. For any new analysis, copy the following files to a new analysis directory: inputs.yaml, run_setup.py
      
 3. Specify inputs in inputs.yaml </b>
   - Note: The pipeline supports the use of mcosima with multiple cores. This can be specified in the yaml file.    
