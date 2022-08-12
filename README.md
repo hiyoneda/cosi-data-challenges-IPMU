@@ -60,8 +60,7 @@ LingBG <br />
 2. For any new analysis, copy the following files to a new analysis directory: inputs.yaml, run_setup.py
      
 3. Specify inputs in inputs.yaml </b>
-  - Note: The pipeline supports the use of mcosima with multiple cores. This can be specified in the yaml file.    
-
+     
 4. Run setup script: python run_setup.py
   - This will setup the source directory and copy all needed files for running the code.
   
