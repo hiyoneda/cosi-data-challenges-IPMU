@@ -6,7 +6,7 @@ import os
 # Initial setup of source directory
 Setup("inputs.yaml").setup_srcs()
 
-# Copy submit files:
+# Copy submission files:
 working_dir = os.getcwd()
 dc_dir = RunDataChallenge("inputs.yaml").dc_dir
 submit_files = os.path.join(dc_dir,"{run_parallel_sims.py,run_sims.py,submit_jobs.py}")

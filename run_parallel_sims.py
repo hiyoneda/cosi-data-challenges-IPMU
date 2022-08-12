@@ -39,7 +39,7 @@ for i in range(0,num_sims+extra):
         # Make new sim_i directory:
         os.system("mkdir %s" %this_dir)
     
-    os.system("scp client_code.py inputs.yaml %s" %this_dir)
+    os.system("scp run_sims.py inputs.yaml %s" %this_dir)
     os.chdir(this_dir)
     new_dir = os.getcwd()
     
@@ -71,12 +71,10 @@ for i in range(0,num_sims+extra):
     os.chdir(home)
 
 # Make main output directory:
-os.system("mkdir Main_Output")
-os.system("mkdir Main_Output/Output")
-os.system("scp client_code.py inputs.yaml submit_jobs.py Main_Output")
+os.system("mkdir Output")
 
 # Write combined tra file:
-f = open("Main_Output/Output/%s.inc1.id1.tra" %name,"w")
+f = open("Output/%s.inc1.id1.tra" %name,"w")
 f.write("TYPE TRA\n\n")
 
 for i in range(0,num_sims+extra):
@@ -87,4 +85,4 @@ for i in range(0,num_sims+extra):
 
 f.write("EN")
 f.close()
-os.system("gzip %s" %"Main_Output/Output/%s.inc1.id1.tra" %name)
+os.system("gzip %s" %"Output/%s.inc1.id1.tra" %name)

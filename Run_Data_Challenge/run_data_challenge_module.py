@@ -47,15 +47,15 @@ class RunDataChallenge:
         self.src_list = inputs["src_list"]
         self.orientation_file = inputs["orientation_file"]
         self.parallel_time_sims = inputs["parallel_time_sims"]
-        self.src_lib = os.path.join(self.dc_dir,"Data_Challenge/Source_Library")
+        self.num_sims = inputs["num_sims"]
+        self.clear_sims = inputs["clear_sims"]
+        self.src_lib = os.path.join(self.dc_dir,"Source_Library")
         self.run_nuc = inputs["run_nuc"]
         self.nuc_config = inputs["nuc_config"]
         self.revan_config = inputs["revan_config"]
         self.mimrec_config = inputs["mimrec_config"]
-
-        # Need to update name of orientation file if running parallel time sims:
-        if self.parallel_time_sims == True:
-            self.orientation_file = "GalacticScan.ori"
+        self.mcosima = inputs["mcosima"]
+        self.num_cores = inputs["num_cores"]
 
     def define_sim(self):
 
@@ -88,6 +88,11 @@ class RunDataChallenge:
         if os.path.exists("GalacticScan.ori"):
             os.system("mv GalacticScan.ori Output")
 
+        # Need to update name of orientation file if running parallel time sims:
+        if self.parallel_time_sims == True:
+            orientation_file = "GalacticScan.ori"
+        else: orientation_file = self.orientation_file
+
         # Write source file:
         f = open(os.path.join("Output",self.source_file),"w")
         f.write("#Source file for data challenge 1\n")
@@ -104,7 +109,7 @@ class RunDataChallenge:
         f.write("Run DataChallenge\n")
         f.write("DataChallenge.FileName               %s\n" %self.name)
         f.write("DataChallenge.Time                   %s\n" %self.time)
-        f.write("DataChallenge.OrientationSky         Galactic File NoLoop %s\n\n" %self.orientation_file)
+        f.write("DataChallenge.OrientationSky         Galactic File NoLoop %s\n\n" %orientation_file)
         
         # Add sources:
         for each in self.src_list:
@@ -133,15 +138,30 @@ class RunDataChallenge:
  
         # Change to output directory:
         os.chdir("Output")
-    
+   
+        # Option to run cosima or mcosima with numerous cores:
+        if self.mcosima == False:
+            executable = "cosima -v 0"
+        if self.mcosima == True:
+            executable = "mcosima -t %s -w" %self.num_cores
+            # Check that no seed has been passed:
+            if seed != "none":
+                print("ERROR: mcosima needs to be ran without a seed.")
+                print("Exiting code.")
+                sys.exit()
+
         # Run Cosima:
         if seed != "none":
             print("running with a seed...")
-            os.system("cosima -v 0 -s %s -z %s | tee cosima_terminal_output.txt" %(seed,self.source_file))
+            os.system("%s -s %s -z %s | tee cosima_terminal_output.txt" %(executable,seed,self.source_file))
         if seed == "none":
             print("running with no seed...")
-            os.system("cosima -v 0 -z %s | tee cosima_terminal_output.txt" %(self.source_file))
+            os.system("%s -z %s | tee cosima_terminal_output.txt" %(executable,self.source_file))
 
+        # For mcosima change name of main output to remain compatible with other methods:
+        if self.mcosima == True:
+            os.system("mv GalacticScan.p1.sim.gz GalacticScan.inc1.id1.sim.gz")
+        
         # Return home:
         os.chdir(self.home)
 
@@ -344,15 +364,15 @@ class RunDataChallenge:
         if extract_root == True:
             
             # Extract spectrum histogram:
-            extract_spectrum_file = os.path.join(self.dc_dir,"Data_Challenge/Run_Data_Challenge/ExtractSpectrum.cxx")
+            extract_spectrum_file = os.path.join(self.dc_dir,"Run_Data_Challenge/ExtractSpectrum.cxx")
             os.system("root -q -b %s" %extract_spectrum_file)
 
             # Extract light curve histogram:
-            extract_lc_file = os.path.join(self.dc_dir,"Data_Challenge/Run_Data_Challenge/ExtractLightCurve.cxx")
+            extract_lc_file = os.path.join(self.dc_dir,"Run_Data_Challenge/ExtractLightCurve.cxx")
             os.system("root -q -b %s" %extract_lc_file)
         
             # Extract image histogram:
-            extract_image_file = os.path.join(self.dc_dir,"Data_Challenge/Run_Data_Challenge/ExtractImage.cxx")
+            extract_image_file = os.path.join(self.dc_dir,"Run_Data_Challenge/ExtractImage.cxx")
             os.system("root -q -b %s" %extract_image_file)
 
         # Go home:

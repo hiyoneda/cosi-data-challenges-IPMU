@@ -5,9 +5,9 @@ void ExtractImage() {
 	//Read in the source file, extract the Canvas, and save the histogram
 	TFile * f1 = new TFile("sim_image.root");
 	//To get canvas name for below run: f1->ls() 
-	TCanvas * C = (TCanvas*)f1->Get("Image___iteration__20___22");
+	TCanvas * C = (TCanvas*)f1->Get("Image___iteration__3___5");
 	//To get hist name for below run: C->GetListOfPrimitives()->Print()
-	TH2D * hist1 = (TH2D*)C->GetPrimitive("Image___iteration__20___22Hist");
+	TH2D * hist1 = (TH2D*)C->GetPrimitive("Image___iteration__3___5Hist");
 
 	//Re draw the histogram
 	TCanvas * C1 = new TCanvas();

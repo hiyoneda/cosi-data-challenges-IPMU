@@ -60,22 +60,23 @@ LingBG <br />
 2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py
      
 3. Specify inputs in inputs.yaml </b>
-  
+  - Note: The pipeline supports the use of mcosima with multiple cores. This can be specified in the yaml file.    
+
 4. Run setup script: python run_setup.py
   - This will setup the source directory and copy all needed files for running the code.
   
 5. To run the code:  </b>
   - Uncomment the functions inside the client code that you want to run.
   - The code can be ran directly from the terminal or submitted to a batch system.
-  - To run from the terminal use python client_code.py.
+  - To run from the terminal use python run_sims.py.
   - To run parallel jobs in cosima with numerous time bins use python run_parallel_sims.py. 
   - To run a single job in cosima with one time bin use python submit_jobs.py. 
 
 6. If running parallel jobs:
   - In the client code uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
-  - After all the jobs finish, change directory to Main_Output, uncomment just the mimrec function in the client code, then run: python submit_jobs.py.
- 
+  - After all the jobs finish, uncomment just the mimrec function in the client code, then run: python submit_jobs.py.
+
 7. Note that the submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's batch system.
 
 </pre>
