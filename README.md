@@ -54,7 +54,7 @@ LingBG <br />
 <pre>
 1. Download cosi-data-challenges directory:
   - git clone https://github.com/ckarwin/COSI.git
-  - It's advised to add the Run_Data_Challenge directory to your python path.
+  - Add the Run_Data_Challenge directory to your python path.
   - Note: This repository does not include the geometery file. 
 
 2. For any new analysis (assuming you added your path), copy the following files to a new analysis directory: inputs.yaml, run_setup.py
