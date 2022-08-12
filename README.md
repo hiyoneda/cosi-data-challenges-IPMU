@@ -65,18 +65,18 @@ LingBG <br />
   - This will setup the source directory and copy all needed files for running the code.
   
 5. To run the code:  </b>
-  - Uncomment the functions inside the client code that you want to run.
+  - Uncomment the functions inside run_sims.py that you want to run.
   - The code can be ran directly from the terminal or submitted to a batch system.
   - To run from the terminal use python run_sims.py.
   - To run parallel jobs in cosima with numerous time bins use python run_parallel_sims.py. 
-  - To run a single job in cosima with one time bin use python submit_jobs.py. 
+  - To submit a single job use python submit_jobs.py. 
 
 6. If running parallel jobs:
-  - In the client code uncomment all functions except mimrec.
+  - In run_sims.py uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
-  - After all the jobs finish, uncomment just the mimrec function in the client code, then run: python submit_jobs.py.
+  - After all the jobs finish, uncomment just the mimrec function in run_sims.py, then run: python submit_jobs.py.
 
-7. Note that the submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's batch system.
+7. Note that the batch submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's specific batch system.
 
 </pre>
 
