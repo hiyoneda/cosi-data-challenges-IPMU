@@ -80,6 +80,11 @@ LingBG <br />
 
 </pre>
 
+## Bug report <br />
+The mcosima option is currently not working. The fix has already been made in MEGAlib, and it just needs to be incorporated in the data challenge pipeline. It should be resolved soon. 
+
+</pre>
+
 ## Best Practices for Adding New Sources <br />
 * New sources should be added to Source_Library. <br />
 * Use Source_Library/crab as a template to follow. See the MEGAlib cosima documentation for more details regarding the inputs. <br />
