@@ -10,30 +10,23 @@ For any help/problems with running the data challenge module please contact Chri
 All final data products for the data challenge are available on the COSI sftp account.
 
 ## Purpose <br />
-The main purpose of this repository is to simulate the all-sky data that will be observed by COSI. The primary code in this folder is **run_data_challenge_module.py**, which can be called with **client_code.py**, with the main input parameters passed via **inputs.yaml**. Additionally, parallel simulations with different time bins can be ran using **run_parellel_sims.py**. The modules can be ran directly from the command line, or submitted to a batch system, which allows them to be easily employed for generating multiple/long simulations. 
+The main purpose of this repository is to simulate the all-sky data that will be observed by COSI. The primary code is **run_data_challenge_module.py**, which can be called with **run_sims.py**, with the main input parameters passed via **inputs.yaml**. Additionally, parallel simulations with multiple time bins can be ran using **run_parellel_sims.py**, which distributes the time bins to seperate compute nodes. The pipeline also supports the use of mcosima with numerous cores per compute node. The modules can be ran directly from the command line, or submitted to a batch system, which allows them to be easily employed for generating multiple/long simulations. 
 
 ## Directory Structure <br />
-The schematic below shows the directory structure. Full installation instructions and a quickstart guide are given below. The main directory (**Data_Challenge**) is provided above.  
+The schematic below shows the directory structure. Full installation instructions and a quickstart guide are given below.   
 
 ```mermaid
 %%{init: {'theme':'default'}}%%
 graph TD;
-    A[Data_Challenge] --- B[Setup] & C[Input_Files] & D[Run_Data_Challenge] & E[Source_Library<br>master_source_list.txt] & F[Examples];
-    B --- Ba(setup.py);
+    A[cosi-data-challenges<br>inputs.yaml<br>run_setup.py<br>run_sims.py<br>run_parallel_sims.py<br>submit_jobs.py] --- C[Input_Files] & D[Run_Data_Challenge<br>run_data_challenge.py<br>setup.py<br>make_orientation_bins.py<br>ExtractImage.cxx<br>ExtractLightCurve.cxx<br>ExtractSpectrum.cxx] & E[Source_Library<br>master_source_list.txt];
     C --- Ca["Orientation_Files"];
     C --- Cb[Geometry_Files];
     C --- Cd[Configuration_Files];
     C --- Ce["Transmission_Probability"];
-    D --- Da(run_data_challenge.py<br>make_orientation_bins.py<br>ExtractImage.cxx<br>ExtractLightCurve.cxx<br>ExtractSpectrum.cxx);
-    E --- Ea[Source1];
-    E --- Eb[Source2];
-    E --- Ec[SourceN];
-    E --- Ed[Make_Sources];
-    Ea --- Eaa(source1.source<br>source1_spec.dat<br>source1_LC.dat<br>source1_pol.dat);
-    Eb --- Ebb(source2.source<br>source2_spec.dat<br>source2_LC.dat<br>source2_pol.dat);
-    Ec --- Ecc(sourceN.source<br>sourceN_spec.dat<br>sourceN_LC.dat<br>sourceN_pol.dat);
-    Ed --- Edd(make_sources.py);
-    F --- Fa(inputs.yaml<br>client_code.py<br>run_parallel_sims.py<br>submit_jobs.py);
+    E --- Ea[Source1<br>source1.source<br>source1_spec.dat<br>source1_LC.dat<br>source1_pol.dat];
+    E --- Eb[Source2<br>source2.source<br>source2_spec.dat<br>source2_LC.dat<br>source2_pol.dat];
+    E --- Ec[SourceN<br>sourceN.source<br>sourceN_spec.dat<br>sourceN_LC.dat<br>sourceN_pol.dat];
+    E --- Ed[Make_Sources<br>make_sources.py];
 ```
 
 ## Available Sources for Simulations <br />
@@ -44,7 +37,6 @@ crab <br />
 vela <br /> 
 cenA <br />
 cygX1 <br />
-DataChallenge1: crab, vela, cenA, and cygX1 <br />
 
 **Diffuse:**  <br />
 Al26 <br />
@@ -60,39 +52,31 @@ LingBG <br />
 
 ## Quickstart Guide <br /> 
 <pre>
-1. Download Data_Challenge directory:
-  - git clone https://github.com/ckarwin/COSI.git
-  - It's advised to add the Run_Data_Challenge directory to your python path.
+1. Download cosi-data-challenges directory:
+  - git clone https://github.com/ckarwin/cosi-data-challenges.git
+  - Add the Run_Data_Challenge directory to your python path.
   - Note: This repository does not include the geometery file. 
 
-2. Setup source library with proper paths:
+2. For any new analysis, copy the following files to a new analysis directory: inputs.yaml, run_setup.py
      
-     cd full/path/Data_Challenge/Setup
-     python setup.py
+3. Specify inputs in inputs.yaml </b>
      
-  - Note: the default transmission probability file is calculated for 33 km.
-     
-3. The Examples directory contains all the scripts needed to run the code </b> 
-  - For any new analysis (assuming you added your path), copy the following files to a new analysis directory: client_code.py, inputs.yaml, run_parallel_sims.py, and submit_jobs.py.
-
-4. Specify inputs in inputs.yaml </b>
-  - For the orientation file use: AllData.ori found in full/path/Data_Challenge/Input_Files/Orientation_Files/COSI_2016_Balloon_Flight
+4. Run setup script: python run_setup.py
+  - This will setup the source directory and copy all needed files for running the code.
   
 5. To run the code:  </b>
-  - Uncomment the functions inside the client code that you want to run.
-  - Note: configuration files are specified in the client code and can be found in full/path/Data_Challenge/Input_Files/Configuration_Files/Data_Challenges/Data_Challenge_1
+  - Uncomment the functions inside run_sims.py that you want to run.
   - The code can be ran directly from the terminal or submitted to a batch system.
-  - To run from the terminal use python client_code.py.
+  - To run from the terminal use python run_sims.py.
   - To run parallel jobs in cosima with numerous time bins use python run_parallel_sims.py. 
-  - To run a single job in cosima with one time bin use python submit_jobs.py. 
+  - To submit a single job use python submit_jobs.py. 
 
 6. If running parallel jobs:
-  - Need to specify name, orientation_file, and num_sims in run_parallel_sims.py. 
-  - In the client code uncomment all functions except mimrec.
+  - In run_sims.py uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
-  - After all the jobs finish, change directory to Main_Output, uncomment just the mimrec function in the client code, then run: python submit_jobs.py.
- 
-7. Note that the scripts found in the Examples directory are starting templates for running the module. They may need to be modified.
+  - After all the jobs finish, uncomment just the mimrec function in run_sims.py, then run: python submit_jobs.py.
+
+7. Note that the batch submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's specific batch system.
 
 </pre>
 
@@ -105,4 +89,4 @@ LingBG <br />
 * Alternatively, send me the source name, position, and spectra, and I can add it to the library.
 
 ## Data Challenge Notes <br />
-**Data Challenge 1:** A brief summary of the first data challenge is available [here](https://drive.google.com/file/d/1GeR5tNGInuIbDskCUN7_H5Pynptr_-Gj/view?usp=sharing) (please request access if needed).
+**Data Challenge 1:** A brief summary of the first data challenge is available [here](https://drive.google.com/file/d/1F4p6Mq6Lg26Cqx8vgu4I_64cIKz3JhV4/view?usp=sharing) (please request access if needed).
