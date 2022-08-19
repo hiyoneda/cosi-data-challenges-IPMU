@@ -81,7 +81,7 @@ LingBG <br />
 </pre>
 
 ## Bug report <br />
-The mcosima option is currently not working. The fix has already been made in MEGAlib, and it just needs to be incorporated in the data challenge pipeline. It should be resolved soon. 
+The mcosima option is currently not working. The fix has already been made in MEGAlib, and it just needs to be incorporated into the data challenge pipeline. It should be resolved soon. 
 
 </pre>
 
