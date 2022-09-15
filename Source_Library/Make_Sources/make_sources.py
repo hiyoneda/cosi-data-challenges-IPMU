@@ -36,8 +36,6 @@ def make_spec_file(src_name, src_energy, src_flux, intg):
     this_name = src_name
     this_dir = "../%s" %this_name
     this_spec = os.path.join(this_dir,this_name + "_spec.dat")
-    if os.path.isdir(this_dir) == False:
-        os.system("mkdir %s" %this_dir)
 
     # Write spectrum file:
     f = open(this_spec,"w")
@@ -78,7 +76,7 @@ def update_src_file(src_name, intg):
         if len(split) == 0:
             g.write(line)
 
-        elif "Flux" in split[0]:
+        elif ".Flux" in split[0]:
             new_line = line.replace(split[1],str(intg))
             g.write(new_line)
 
@@ -97,8 +95,22 @@ src_name, photons, intg = crab.crab_flux(energy_range, elow, ehigh)
 make_spec_file(src_name, energy_range, photons, intg)
 update_src_file(src_name, intg)
 
+# Crab_10xFlux:
+src_name, photons, intg = crab.crab_flux(energy_range, elow, ehigh)
+src_name += "_10xFlux"
+intg = 10*intg
+make_spec_file(src_name, energy_range, photons, intg)
+update_src_file(src_name, intg)
+
 # CenA
 src_name, photons, intg = cenA.cenA_flux(energy_range, elow, ehigh)
+make_spec_file(src_name, energy_range, photons, intg)
+update_src_file(src_name, intg)
+
+# CenA_10xFlux
+src_name, photons, intg = cenA.cenA_flux(energy_range, elow, ehigh)
+src_name += "_10xFlux"
+intg = 10*intg
 make_spec_file(src_name, energy_range, photons, intg)
 update_src_file(src_name, intg)
 
@@ -107,7 +119,21 @@ src_name, photons, intg = vela.vela_flux(energy_range, elow, ehigh)
 make_spec_file(src_name, energy_range, photons, intg)
 update_src_file(src_name, intg)
 
+# Vela_10xFlux:
+src_name, photons, intg = vela.vela_flux(energy_range, elow, ehigh)
+src_name += "_10xFlux"
+intg = 10*intg
+make_spec_file(src_name, energy_range, photons, intg)
+update_src_file(src_name, intg)
+
 # CygX1:
 src_name, photons, intg = cygX1.cygX1_flux(energy_range, elow, ehigh)
+make_spec_file(src_name, energy_range, photons, intg)
+update_src_file(src_name, intg)
+
+# CygX1_10xFlux:
+src_name, photons, intg = cygX1.cygX1_flux(energy_range, elow, ehigh)
+src_name += "_10xFlux"
+intg = 10*intg
 make_spec_file(src_name, energy_range, photons, intg)
 update_src_file(src_name, intg)

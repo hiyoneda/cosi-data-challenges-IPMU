@@ -1,0 +1,7 @@
+DataChallenge.Source          cenA_10xFlux
+cenA_10xFlux.ParticleType               1
+cenA_10xFlux.Beam                       FarFieldPointSource 0 0
+cenA_10xFlux.Orientation                Galactic Fixed 19.417 309.516
+cenA_10xFlux.Spectrum                   File cenA_10xFlux_spec.dat
+cenA_10xFlux.Flux                       0.03609
+cenA_10xFlux.FarFieldTransmissionProbability TransmissionProbability_33000.dat
