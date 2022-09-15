@@ -34,9 +34,13 @@ The simulated sources are passed via the inputs.yaml file. The following sources
 
 **Point Sources:**  <br />
 crab <br />
+crab_10xFlux <br />
 vela <br /> 
+vela_10xFlux <br />
 cenA <br />
+cenA_10xFlux <br />
 cygX1 <br />
+cygX1_10xFlux <br />
 
 **Diffuse:**  <br />
 Al26 <br />
