@@ -6,7 +6,7 @@
 'vela',
 'vela_10xFlux',
 'cygX1',
-'cygX1_10xFlux' 
+'cygX1_10xFlux',
 'LingBG', 
 'Al26', 
 'Al26_10xFlux', 
