@@ -34,9 +34,13 @@ The simulated sources are passed via the inputs.yaml file. The following sources
 
 **Point Sources:**  <br />
 crab <br />
+crab_10xFlux <br />
 vela <br /> 
+vela_10xFlux <br />
 cenA <br />
+cenA_10xFlux <br />
 cygX1 <br />
+cygX1_10xFlux <br />
 
 **Diffuse:**  <br />
 Al26 <br />
@@ -53,7 +57,7 @@ LingBG <br />
 ## Quickstart Guide <br /> 
 <pre>
 1. Download cosi-data-challenges directory:
-  - git clone https://github.com/cositools/cosi-data-challenges.git
+  - git clone https://github.com/ckarwin/cosi-data-challenges.git
   - Add the Run_Data_Challenge directory to your python path.
   - Note: This repository does not include the geometery file. 
 
@@ -81,9 +85,8 @@ LingBG <br />
 </pre>
 
 ## Bug report <br />
-The mcosima option is currently not working. The fix has already been made in MEGAlib, and it just needs to be incorporated into the data challenge pipeline. It should be resolved soon. 
-
-</pre>
+* The mcosima option is currently not working. The fix has already been made in MEGAlib, and it just needs to be incorporated into the data challenge pipeline. It should be resolved soon.
+* The number of iterations in ExtractImage.cxx needs to be changed manually if using a different value than the default (20). Specifically, this is at lines 8 and 10. For x iterations: 20 --> x and 22 --> x+2. This will be automated soon.  
 
 ## Best Practices for Adding New Sources <br />
 * New sources should be added to Source_Library. <br />
@@ -94,4 +97,4 @@ The mcosima option is currently not working. The fix has already been made in ME
 * Alternatively, send me the source name, position, and spectra, and I can add it to the library.
 
 ## Data Challenge Notes <br />
-**Data Challenge 1:** A brief summary of the first data challenge is available [here](https://drive.google.com/file/d/1F4p6Mq6Lg26Cqx8vgu4I_64cIKz3JhV4/view?usp=sharing) (please request access if needed).
+**Data Challenge 1:** A brief summary of the first data challenge is available [here](https://drive.google.com/file/d/1hhQsTrG79_6ljsuQEyCeZZYY6REGB3io/view?usp=sharing) (please request access if needed).
