@@ -173,7 +173,7 @@ class RunDataChallenge:
         input definitions:
             
          geo_file: Optional input.
-            - Option to use a different geometry file. 
+            - Option to use a different geometry file. Must specify full path.  
         """
 
         # Make print statement:
@@ -227,7 +227,7 @@ class RunDataChallenge:
         input definitions:
          
          geo_file: Optional input.
-            - Option to use a different geometry file.
+            - Option to use a different geometry file. Must specify full path. 
         """
 
         # Make print statement:
@@ -287,7 +287,7 @@ class RunDataChallenge:
          extract_root: if true will extract data for LC and spectrum. 
             - Default is False.
 
-         geo_file: Option to use a different geometry file.
+         geo_file: Option to use a different geometry file. Must specify full path. 
         """
 
         # Make print statement:
@@ -380,3 +380,40 @@ class RunDataChallenge:
 
         return
 
+    def clear_unessential_data(self):
+
+        """By default the main simulation pipeline saves all of the output,
+        for diagnostic purposes. This method removes un-needed output 
+        files in order to reduce disk space."""
+
+        # Get initial disk usage:
+        print()
+        print("Checking initial directory size...")
+        os.system("du -h -d0 Simulations/")
+        
+        # Change to Simulations directory:
+        os.chdir("Simulations")
+        
+        # Write directories to temporary file and read:
+        os.system("ls -d */ > dirs.dat")
+        df = pd.read_csv("dirs.dat", names=["dirs"], header=None)
+        dirs_list = df["dirs"].tolist()
+        
+        # Remove un-needed files:
+        print("Removing un-needed files...")
+        for each in dirs_list:
+            os.chdir(os.path.join(each,"Output"))
+            os.system("rm -rf crossections cosima_terminal_output.txt \
+                    revan_terminal_output.txt nuclearizer_terminal_output.txt")
+            os.chdir("../..")
+        os.system("rm dirs.dat")
+        
+        # Go home:
+        os.chdir(self.home)
+
+        # Get final disk usage:
+        print("Checking final directory size...")
+        os.system("du -h -d0 Simulations/")
+        print()
+
+        return
