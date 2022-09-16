@@ -173,7 +173,7 @@ class RunDataChallenge:
         input definitions:
             
          geo_file: Optional input.
-            - Option to use a different geometry file. 
+            - Option to use a different geometry file. Must specify full path.  
         """
 
         # Make print statement:
@@ -227,7 +227,7 @@ class RunDataChallenge:
         input definitions:
          
          geo_file: Optional input.
-            - Option to use a different geometry file.
+            - Option to use a different geometry file. Must specify full path. 
         """
 
         # Make print statement:
@@ -287,7 +287,7 @@ class RunDataChallenge:
          extract_root: if true will extract data for LC and spectrum. 
             - Default is False.
 
-         geo_file: Option to use a different geometry file.
+         geo_file: Option to use a different geometry file. Must specify full path. 
         """
 
         # Make print statement:
