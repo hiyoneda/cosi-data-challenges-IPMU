@@ -9,6 +9,7 @@
 #   RunDataChallenge(superclass)
 #       -define_sim()
 #       -run_cosima(seed="none")
+#       -msimconcatter()
 #       -run_nuclearizer(geo_file="default")
 #       -run_revan(geo_file="default")
 #       -run_mimrec(extract_root=False, geo_file="default")
