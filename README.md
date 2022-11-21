@@ -50,6 +50,7 @@ GC511A_10xFlux <br />
 GC511B (based on Skinner+14) <br />
 GalBrem <br />
 GalIC
+GalTotal_SA100_F98
 
 **Background:**  <br />
 LingBG <br />
