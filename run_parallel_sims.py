@@ -13,6 +13,8 @@ name = instance.name
 orientation_file = instance.orientation_file
 num_sims = instance.num_sims 
 clear = instance.clear_sims 
+mcosima = instance.mcosima
+num_cores = instance.num_cores
 
 # Make orientation time bins:
 # Note: the function returns 0 or 1 depending if an extra file is needed (see for loop below).
@@ -55,7 +57,7 @@ for i in range(0,num_sims+extra):
     f.write("#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=48:00:00\n\n")
     f.write("#the MEGAlib environment first needs to be sourced:\n")
     f.write("cd /zfs/astrohe/Software\n")
-    f.write("source COSIMain.sh\n\n")
+    f.write("source COSIMain_u2.sh\n\n")
     f.write("#change to working directory and run job\n")
     f.write("cd %s\n" %new_dir)
     f.write("python run_sims.py")
@@ -73,16 +75,49 @@ for i in range(0,num_sims+extra):
 # Make main output directory:
 os.system("mkdir Output")
 
-# Write combined tra file:
-f = open("Output/%s.inc1.id1.tra" %name,"w")
-f.write("TYPE TRA\n\n")
+if mcosima == False:
 
-for i in range(0,num_sims+extra):
+    # Write combined tra file:
+    f = open("Output/%s.inc1.id1.tra" %name,"w")
+    f.write("TYPE TRA\n\n")
+
+    for i in range(0,num_sims+extra):
     
-    this_name = "Simulations/sim_%s/Output/%s.inc1.id1.tra.gz" %(str(i),name)
-    this_file = os.path.join(home,this_name)
-    f.write("IN %s\n" %this_file)
+        this_name = "Simulations/sim_%s/Output/%s.inc1.id1.tra.gz" %(str(i),name)
+        this_file = os.path.join(home,this_name)
+        f.write("IN %s\n" %this_file)
 
-f.write("EN")
-f.close()
-os.system("gzip %s" %"Output/%s.inc1.id1.tra" %name)
+    f.write("EN")
+    f.close()
+    os.system("gzip %s" %"Output/%s.inc1.id1.tra" %name)
+
+if mcosima == True:
+   
+    # Write total combined tra file for each cosima instance:
+    g = open("Output/%s.inc1.id1.tra" %(name),"w")
+    g.write("TYPE TRA\n\n")
+    
+    # Iterate through each cosima instance:
+    for s in range(1,num_cores+1):
+
+        # Write combined tra file for given cosima instance:
+        this_dir = "Output/core_" + str(s)
+        os.system("mkdir %s" %this_dir)
+        os.system("mkdir %s/Output" %this_dir)
+        f = open("%s/Output/%s.inc1.id1.tra" %(this_dir,name),"w")
+        f.write("TYPE TRA\n\n")
+
+        for i in range(0,num_sims+extra):
+
+            this_name = "Simulations/sim_%s/Output/%s.p1.inc%s.id1.tra.gz" %(str(i),name,str(s))
+            this_file = os.path.join(home,this_name)
+            f.write("IN %s\n" %this_file)
+            g.write("IN %s\n" %this_file)
+
+        f.write("EN")
+        f.close()
+        os.system("gzip %s" %"%s/Output/%s.inc1.id1.tra" %(this_dir,name))
+
+    g.write("EN")
+    g.close()
+    os.system("gzip %s" %"Output/%s.inc1.id1.tra" %(name))
