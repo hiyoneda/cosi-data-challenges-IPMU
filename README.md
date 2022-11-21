@@ -49,8 +49,8 @@ GC511A (based on Knoedlseder+05) <br />
 GC511A_10xFlux <br />
 GC511B (based on Skinner+14) <br />
 GalBrem <br />
-GalIC
-GalTotal_SA100_F98
+GalIC <br />
+GalTotal_SA100_F98 <br />
 
 **Background:**  <br />
 LingBG <br />
