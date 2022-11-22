@@ -4,7 +4,7 @@
 The data challenge module requires the MEGAlib code, available [here](http://megalibtoolkit.com/home.html). Among other things, MEGAlib simulates the emission from any (MeV) gamma-ray source, simulates the instrument response, performs the event reconstruction, and performs the high-level data analysis. See the above link for more details regarding the MEGAlib package.   
 
 ## Getting Help <br />
-For any help/problems with running the data challenge module please contact Chris Karwin at: ckarwin@clemson.edu. 
+For any help/problems with running the data challenge module please contact Chris Karwin at: christopher.m.karwin@nasa.gov. 
 
 ## Data Products <br />
 All final data products for the data challenge are available on the COSI sftp account.
@@ -49,8 +49,8 @@ GC511A (based on Knoedlseder+05) <br />
 GC511A_10xFlux <br />
 GC511B (based on Skinner+14) <br />
 GalBrem <br />
-GalIC
-GalTotal_SA100_F98
+GalIC <br />
+GalTotal_SA100_F98 <br />
 
 **Background:**  <br />
 LingBG <br />
@@ -86,7 +86,6 @@ LingBG <br />
 </pre>
 
 ## Bug report <br />
-* The mcosima option is currently not working. The fix has already been made in MEGAlib, and it just needs to be incorporated into the data challenge pipeline. It should be resolved soon.
 * The number of iterations in ExtractImage.cxx needs to be changed manually if using a different value than the default (20). Specifically, this is at lines 8 and 10. For x iterations: 20 --> x and 22 --> x+2. This will be automated soon.  
 
 ## Best Practices for Adding New Sources <br />
