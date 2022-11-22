@@ -134,25 +134,25 @@ class RunDataChallenge:
 
         # Make print statement:
         print()
-        print("********** Run_Data_Challenge_Module ************")
         print("Running run_cosima...")
         print()
  
         # Change to output directory:
         os.chdir("Output")
    
-        # Option to run cosima or mcosima with numerous cores:
+        # Construct executable:
+        # Option to run cosima or mcosima with numerous cores.
         if self.mcosima == False:
             executable = "cosima -v 0"
         if self.mcosima == True:
-            executable = "mcosima -t %s -w" %self.num_cores
+            executable = "mcosima -t %s -w -a" %self.num_cores
             # Check that no seed has been passed:
             if seed != "none":
                 print("ERROR: mcosima needs to be ran without a seed.")
                 print("Exiting code.")
                 sys.exit()
 
-        # Run Cosima:
+        # Run executable:
         if seed != "none":
             print("running with a seed...")
             os.system("%s -s %s -z %s | tee cosima_terminal_output.txt" %(executable,seed,self.source_file))
@@ -160,13 +160,27 @@ class RunDataChallenge:
             print("running with no seed...")
             os.system("%s -z %s | tee cosima_terminal_output.txt" %(executable,self.source_file))
 
-        # For mcosima change name of main output to remain compatible with other methods:
+        # Concatenate sim files:
         if self.mcosima == True:
-            os.system("mv GalacticScan.p1.sim.gz GalacticScan.inc1.id1.sim.gz")
+            self.msimconcatter()
         
         # Return home:
         os.chdir(self.home)
 
+        return
+
+    def msimconcatter(self):
+        
+        """Concatenate output sim files from mcosima."""
+
+        # Construct string of files to concatenate:
+        cat_string = ""
+        for i in range(0,self.num_cores):
+            cat_string += " %s.p1.inc%s.id1.sim.gz" %(self.name,str(i+1))
+        
+        # Concatenate files:
+        os.system("msimconcatter %s" %cat_string)
+        
         return
 
     def run_nuclearizer(self, geo_file="default"):
@@ -176,11 +190,14 @@ class RunDataChallenge:
             
          geo_file: Optional input.
             - Option to use a different geometry file. Must specify full path.  
+            - This option is for cosima runs only.
+
+        Note: If running mcosima, then the nuclearizer configuration file 
+              must point to the correct geometry file. 
         """
 
         # Make print statement:
         print()
-        print("********** Run_Data_Challenge_Module ************")
         print("Running run_nuclearizer...")
         print()
 
@@ -190,33 +207,39 @@ class RunDataChallenge:
 
         # Change to output directory:
         os.chdir("Output")
-    
-        # Remove output file if it already exists (for rerunning option):
-        if os.path.exists("output.evta.gz"):
-            os.system("rm output.evta.gz nuclearizer_terminal_output.txt")
+   
+        # Default mode:
+        if self.mcosima == False:
+
+            # Remove output file if it already exists (for rerunning option):
+            if os.path.exists("output.evta.gz"):
+                os.system("rm output.evta.gz nuclearizer_terminal_output.txt")
         
-        # Define input sim file:
-        sim_file = self.name + ".inc1.id1.sim.gz"
+            # Define input sim file:
+            sim_file = self.name + ".inc1.id1.sim.gz"
 
-        # Make sure input sim file exists:
-        if os.path.exists(sim_file) == False:
-            print("ERROR: The input file needed for nuclearizer does not exist.") 
-            print("Exiting Code!")
-            sys.exit()
-
-        # Run nuclearizer:
-        if self.nuc_config != "none":
-
-            print("running with a configuration file...")
-            os.system("nuclearizer -a -g %s -c %s \
+            # Make sure input sim file exists:
+            if os.path.exists(sim_file) == False:
+                print("ERROR: The input file needed for nuclearizer does not exist.") 
+                print("Exiting Code!")
+                sys.exit()
+                  
+            if self.nuc_config != "none":
+                os.system("nuclearizer -a -g %s -c %s \
                     -C ModuleOptions.XmlTagSimulationLoader.SimulationFileName=%s \
                     | tee nuclearizer_terminal_output.txt" %(self.geo_file, self.nuc_config, sim_file))
-
-        if self.nuc_config == "none":
-            print("running without a configuration file...")
-            os.system("nuclearizer -a -g %s \
+        
+            if self.nuc_config == "none":
+                print("running without a configuration file...")
+                os.system("nuclearizer -a -g %s \
                     -C ModuleOptions.XmlTagSimulationLoader.SimulationFileName=%s \
                     | tee nuclearizer_terminal_output.txt" %(self.geo_file, sim_file))
+
+        # mcosima mode:
+        if self.mcosima == True:
+            sim_files = "%s.p1.inc{1..%s}.id1.sim.gz"  %(self.name, str(self.num_cores))
+            os.system("mnuclearizer -c %s -f %s\
+                    | tee nuclearizer_terminal_output.txt" %(self.nuc_config, sim_files))
 
         # Go home:
         os.chdir(self.home)
@@ -234,7 +257,6 @@ class RunDataChallenge:
 
         # Make print statement:
         print()
-        print("********** Run_Data_Challenge_Module ************")
         print("Running run_revan...")
         print()
 
@@ -244,38 +266,47 @@ class RunDataChallenge:
         
         # Change to output directory:
         os.chdir("Output")
+ 
+        # Default mode:
+        if self.mcosima == False:
+       
+            # Remove output file if it already exists (option for rerunning):
+            tra_file_name = self.name + ".inc1.id1.tra.gz"
+            if os.path.exists(tra_file_name):
+                os.system("rm %s revan_terminal_output.txt" %tra_file_name)
 
-        # Remove output file if it already exists (option for rerunning):
-        tra_file_name = self.name + ".inc1.id1.tra.gz"
-        if os.path.exists(tra_file_name):
-            os.system("rm %s revan_terminal_output.txt" %tra_file_name)
-
-        # Define input sim file:
-        if self.run_nuc == False:
-            sim_file = self.name + ".inc1.id1.sim.gz"
-        if self.run_nuc == True:
-            sim_file = "output.evta.gz" # depends on name in nuclearizer configuration file!
+            # Define input sim file:
+            if self.run_nuc == False:
+                sim_file = self.name + ".inc1.id1.sim.gz"
+            if self.run_nuc == True:
+                sim_file = "output.evta.gz" # depends on name in nuclearizer configuration file!
             
-        # Make sure input sim file exists:
-        if os.path.exists(sim_file) == False:
-            print("ERROR: The input file needed for revan does not exist.")
-            print("Exiting code!")
-            sys.exit()
+            # Make sure input sim file exists:
+            if os.path.exists(sim_file) == False:
+                print("ERROR: The input file needed for revan does not exist.")
+                print("Exiting code!")
+                sys.exit()
         
-        # Run revan:
-        if self.revan_config != "none":
+            # Run revan:
+            if self.revan_config != "none":
 
-            print("running with a configuration file...")
-            os.system("revan -g %s -c %s -f %s -n -a | tee revan_terminal_output.txt" %(self.geo_file, self.revan_config, sim_file))
+                print("running with a configuration file...")
+                os.system("revan -g %s -c %s -f %s -n -a | tee revan_terminal_output.txt" %(self.geo_file, self.revan_config, sim_file))
 
-        if self.revan_config == "none":
-            print("running without a configuration file...")
-            os.system("revan -g %s -f %s -n -a | tee revan_terminal_output.txt" %(self.geo_file, sim_file))
+            if self.revan_config == "none":
+                print("running without a configuration file...")
+                os.system("revan -g %s -f %s -n -a | tee revan_terminal_output.txt" %(self.geo_file, sim_file))
     
-        # Cchange name of output if running nuclearizer:
-        if self.run_nuc == True:
-            os.system("mv output.tra.gz %s" %tra_file_name)
+            # Change name of output if running nuclearizer:
+            if self.run_nuc == True:
+                os.system("mv output.tra.gz %s" %tra_file_name)
         
+        # mcosima mode:
+        if self.mcosima == True:
+            sim_files = "%s.p1.inc{1..%s}.id1.evta.gz"  %(self.name, str(self.num_cores))
+            os.system("mrevan -g %s -c %s -f %s\
+                    | tee revan_terminal_output.txt" %(self.geo_file, self.revan_config, sim_files))
+            
         # Go home:
         os.chdir(self.home)
 
@@ -294,7 +325,6 @@ class RunDataChallenge:
 
         # Make print statement:
         print()
-        print("********** Run_Data_Challenge_Module ************")
         print("Running run_mimrec...")
         print()
 
