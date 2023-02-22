@@ -16,5 +16,7 @@
 'GC511A_10xFlux',
 'GC511B',
 'OrthoPs',
-'GalTotal_SA100_F98'
+'GalTotal_SA100_F98',
+'GalTS_Baseline',
+'GalTS_BestMatch'
 ]
