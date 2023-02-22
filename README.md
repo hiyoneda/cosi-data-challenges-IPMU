@@ -6,8 +6,8 @@ The data challenge module requires the MEGAlib code, available [here](http://meg
 ## Getting Help <br />
 For any help/problems with running the data challenge module please contact Chris Karwin at: christopher.m.karwin@nasa.gov. 
 
-## Data Products <br />
-All final data products for the data challenge are available on the COSI sftp account.
+## Data Challenge Releases <br />
+* The first data challenge is now available! It can be found [here](https://github.com/cositools/cosi-data-challenge-1.git).
 
 ## Purpose <br />
 The main purpose of this repository is to simulate the all-sky data that will be observed by COSI. The primary code is **run_data_challenge_module.py**, which can be called with **run_sims.py**, with the main input parameters passed via **inputs.yaml**. Additionally, parallel simulations with multiple time bins can be ran using **run_parellel_sims.py**, which distributes the time bins to seperate compute nodes. The pipeline also supports the use of mcosima with numerous cores per compute node. The modules can be ran directly from the command line, or submitted to a batch system, which allows them to be easily employed for generating multiple/long simulations. 
@@ -30,30 +30,7 @@ graph TD;
 ```
 
 ## Available Sources for Simulations <br />
-The simulated sources are passed via the inputs.yaml file. The following sources are available:
-
-**Point Sources:**  <br />
-crab <br />
-crab_10xFlux <br />
-vela <br /> 
-vela_10xFlux <br />
-cenA <br />
-cenA_10xFlux <br />
-cygX1 <br />
-cygX1_10xFlux <br />
-
-**Diffuse:**  <br />
-Al26 <br />
-Al26_10xFlux <br />
-GC511A (based on Knoedlseder+05) <br />
-GC511A_10xFlux <br />
-GC511B (based on Skinner+14) <br />
-GalBrem <br />
-GalIC <br />
-GalTotal_SA100_F98 <br />
-
-**Background:**  <br />
-LingBG <br />
+See Source_Library for available sources. Let us know if you want any specific source added!
 
 ## Quickstart Guide <br /> 
 <pre>
@@ -87,14 +64,3 @@ LingBG <br />
 
 ## Bug report <br />
 * The number of iterations in ExtractImage.cxx needs to be changed manually if using a different value than the default (20). Specifically, this is at lines 8 and 10. For x iterations: 20 --> x and 22 --> x+2. This will be automated soon.  
-
-## Best Practices for Adding New Sources <br />
-* New sources should be added to Source_Library. <br />
-* Use Source_Library/crab as a template to follow. See the MEGAlib cosima documentation for more details regarding the inputs. <br />
-* Define a directory for the source using its simple name (i.e. src_name). The same name must be used for all files in the directory. <br />
-* At minimum the source directory needs to contain a source file (src_name.source) and a spectral file (src_name.dat). In the future it may also include a light curve file and a polarization file. <br />
-* The source also needs to be added to master_source_list.txt in Source_Library.
-* Alternatively, send me the source name, position, and spectra, and I can add it to the library.
-
-## Data Challenge Notes <br />
-**Data Challenge 1:** A brief summary of the first data challenge is available [here](https://drive.google.com/file/d/1hhQsTrG79_6ljsuQEyCeZZYY6REGB3io/view?usp=sharing) (please request access if needed).
