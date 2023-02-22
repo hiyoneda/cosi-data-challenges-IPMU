@@ -85,16 +85,5 @@ LingBG <br />
 
 </pre>
 
-## Bug Report <br />
+## Bug report <br />
 * The number of iterations in ExtractImage.cxx needs to be changed manually if using a different value than the default (20). Specifically, this is at lines 8 and 10. For x iterations: 20 --> x and 22 --> x+2. This will be automated soon.  
-
-## Best Practices for Adding New Sources <br />
-* New sources should be added to Source_Library. <br />
-* Use Source_Library/crab as a template to follow. See the MEGAlib cosima documentation for more details regarding the inputs. <br />
-* Define a directory for the source using its simple name (i.e. src_name). The same name must be used for all files in the directory. <br />
-* At minimum the source directory needs to contain a source file (src_name.source) and a spectral file (src_name.dat). In the future it may also include a light curve file and a polarization file. <br />
-* The source also needs to be added to master_source_list.txt in Source_Library.
-* Alternatively, send me the source name, position, and spectra, and I can add it to the library.
-
-## Data Challenge Notes <br />
-**Data Challenge 1:** A brief summary of the first data challenge is available [here](https://drive.google.com/file/d/1hhQsTrG79_6ljsuQEyCeZZYY6REGB3io/view?usp=sharing) (please request access if needed).
