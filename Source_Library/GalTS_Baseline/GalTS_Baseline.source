@@ -1,0 +1,7 @@
+DataChallenge.Source GalTS_Baseline
+
+GalTS_Baseline.ParticleType 1
+GalTS_Baseline.Beam FarFieldNormalizedEnergyBeamFluxFunction GalTS_Baseline_input.dat
+GalTS_Baseline.Spectrum NormalizedEnergyBeamFluxFunction
+GalTS_Baseline.Orientation Galactic Fixed 90 180
+GalTS_Baseline.FarFieldTransmissionProbability TransmissionProbability_33000.dat

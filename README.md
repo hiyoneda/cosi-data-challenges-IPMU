@@ -6,54 +6,14 @@ The data challenge module requires the MEGAlib code, available [here](http://meg
 ## Getting Help <br />
 For any help/problems with running the data challenge module please contact Chris Karwin at: christopher.m.karwin@nasa.gov. 
 
-## Data Products <br />
-All final data products for the data challenge are available on the COSI sftp account.
+## Data Challenge Releases <br />
+* March 2023: The first data challenge is now available! It can be found [here](https://github.com/cositools/cosi-data-challenge-1.git).
 
 ## Purpose <br />
 The main purpose of this repository is to simulate the all-sky data that will be observed by COSI. The primary code is **run_data_challenge_module.py**, which can be called with **run_sims.py**, with the main input parameters passed via **inputs.yaml**. Additionally, parallel simulations with multiple time bins can be ran using **run_parellel_sims.py**, which distributes the time bins to seperate compute nodes. The pipeline also supports the use of mcosima with numerous cores per compute node. The modules can be ran directly from the command line, or submitted to a batch system, which allows them to be easily employed for generating multiple/long simulations. 
 
-## Directory Structure <br />
-The schematic below shows the directory structure. Full installation instructions and a quickstart guide are given below.   
-
-```mermaid
-%%{init: {'theme':'default'}}%%
-graph TD;
-    A[cosi-data-challenges<br>inputs.yaml<br>run_setup.py<br>run_sims.py<br>run_parallel_sims.py<br>submit_jobs.py] --- C[Input_Files] & D[Run_Data_Challenge<br>run_data_challenge.py<br>setup.py<br>make_orientation_bins.py<br>ExtractImage.cxx<br>ExtractLightCurve.cxx<br>ExtractSpectrum.cxx] & E[Source_Library<br>master_source_list.txt];
-    C --- Ca["Orientation_Files"];
-    C --- Cb[Geometry_Files];
-    C --- Cd[Configuration_Files];
-    C --- Ce["Transmission_Probability"];
-    E --- Ea[Source1<br>source1.source<br>source1_spec.dat<br>source1_LC.dat<br>source1_pol.dat];
-    E --- Eb[Source2<br>source2.source<br>source2_spec.dat<br>source2_LC.dat<br>source2_pol.dat];
-    E --- Ec[SourceN<br>sourceN.source<br>sourceN_spec.dat<br>sourceN_LC.dat<br>sourceN_pol.dat];
-    E --- Ed[Make_Sources<br>make_sources.py];
-```
-
 ## Available Sources for Simulations <br />
-The simulated sources are passed via the inputs.yaml file. The following sources are available:
-
-**Point Sources:**  <br />
-crab <br />
-crab_10xFlux <br />
-vela <br /> 
-vela_10xFlux <br />
-cenA <br />
-cenA_10xFlux <br />
-cygX1 <br />
-cygX1_10xFlux <br />
-
-**Diffuse:**  <br />
-Al26 <br />
-Al26_10xFlux <br />
-GC511A (based on Knoedlseder+05) <br />
-GC511A_10xFlux <br />
-GC511B (based on Skinner+14) <br />
-GalBrem <br />
-GalIC <br />
-GalTotal_SA100_F98 <br />
-
-**Background:**  <br />
-LingBG <br />
+See Source_Library for available sources. Let us know if you want any specific source added!
 
 ## Quickstart Guide <br /> 
 <pre>

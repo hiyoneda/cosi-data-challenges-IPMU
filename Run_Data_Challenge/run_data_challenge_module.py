@@ -22,6 +22,13 @@
 import os,sys,shutil 
 import yaml
 import pandas as pd
+import numpy as np
+import scipy.integrate as integrate
+from scipy.interpolate import interp1d
+import matplotlib.pyplot as plt
+import math
+import gzip
+from cosipy.make_plots import MakePlots
 ######################
 
 
@@ -58,6 +65,10 @@ class RunDataChallenge:
         self.mimrec_config = inputs["mimrec_config"]
         self.mcosima = inputs["mcosima"]
         self.num_cores = inputs["num_cores"]
+        self.ntriggers = inputs["ntriggers"]
+        self.ASphere = inputs["ASphere"]
+        self.include_transmission_prob = inputs["include_transmission_prob"]
+        self.transmission_prob_file = inputs["transmission_prob_file"]
 
     def define_sim(self):
 
@@ -124,7 +135,7 @@ class RunDataChallenge:
     
         return
     
-    def run_cosima(self, seed="none"):
+    def run_cosima(self, seed="none", verbosity=0):
         
         """
         input definitions:
@@ -143,7 +154,7 @@ class RunDataChallenge:
         # Construct executable:
         # Option to run cosima or mcosima with numerous cores.
         if self.mcosima == False:
-            executable = "cosima -v 0"
+            executable = "cosima -v %s" %str(verbosity)
         if self.mcosima == True:
             executable = "mcosima -t %s -w -a" %self.num_cores
             # Check that no seed has been passed:
@@ -312,7 +323,7 @@ class RunDataChallenge:
 
         return
 
-    def run_mimrec(self, extract_root=False, geo_file="default"):
+    def run_mimrec(self, extract_root=False, geo_file="default", energy=None):
         
         """
         input definitions:
@@ -321,6 +332,8 @@ class RunDataChallenge:
             - Default is False.
 
          geo_file: Option to use a different geometry file. Must specify full path. 
+        
+         energy: Energy in keV. For calculating Aeff from monoenergetic sims. 
         """
 
         # Make print statement:
@@ -336,10 +349,10 @@ class RunDataChallenge:
         os.chdir("Output")
     
         # Define tra file:
-        tra_file = self.name + ".inc1.id1.tra.gz"
+        tra_file =  self.name + ".inc1.id1.tra.gz"
 
         # Define outputs:
-        output_events = "%s.inc1.id1.extracted.tra.gz" %self.name
+        output_events =  "%s.inc1.id1.extracted.tra.gz" %self.name
 
         # Set pdf or root output:
         file_type = ".pdf"
@@ -372,7 +385,16 @@ class RunDataChallenge:
             os.system("mimrec -g %s -c %s -f %s -l -o %s -n \
                     | tee mimrec_LC_terminal_output.txt" %(self.geo_file, self.mimrec_config, tra_file, output_LC))
 
-
+            # Extract arm:
+            if energy is not None:
+                elow = energy - 11
+                ehigh = energy + 11
+                os.system("mimrec -g %s -c %s -f %s -a -n \
+                    -C EventSelections.FirstEnergyWindow.Min=%s \
+                    -C EventSelections.FirstEnergyWindow.Max=%s \
+                    | tee mimrec_arm_output.txt" \
+                    %(self.geo_file, self.mimrec_config, tra_file, str(elow), str(ehigh)))
+            
         if self.mimrec_config == "none":
             
             print("running without a configuration file...")
@@ -392,7 +414,7 @@ class RunDataChallenge:
             # Make LC:
             os.system("mimrec -g %s -f %s -l -o %s -n \
                     | tee mimrec_LC_terminal_output.txt" %(self.geo_file, tra_file, output_LC))
-               
+        
         if extract_root == True:
             
             # Extract spectrum histogram:
@@ -449,3 +471,4 @@ class RunDataChallenge:
         print()
 
         return
+
