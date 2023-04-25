@@ -7,7 +7,7 @@ from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import math
 import gzip
-from cosipy.make_plots import MakePlots
+from make_plots import MakePlots
 from run_data_challenge_module import RunDataChallenge
 
 class CalcAeff(RunDataChallenge):
