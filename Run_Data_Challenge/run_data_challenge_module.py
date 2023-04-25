@@ -28,7 +28,6 @@ from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import math
 import gzip
-from cosipy.make_plots import MakePlots
 ######################
 
 
@@ -108,7 +107,7 @@ class RunDataChallenge:
 
         # Write source file:
         f = open(os.path.join("Output",self.source_file),"w")
-        f.write("#Source file for data challenge 1\n")
+        f.write("#Source file for data challenge\n")
         f.write("#The detector rotates in the Galactic coordiante system as given in the ori file.\n")
         f.write("#The point sources are fixed in Galactic coordinates.\n\n")
         f.write("#geometry file\n")
