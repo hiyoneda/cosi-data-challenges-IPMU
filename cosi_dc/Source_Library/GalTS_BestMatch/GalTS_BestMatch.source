@@ -1,0 +1,7 @@
+DataChallenge.Source GalTS_BestMatch
+
+GalTS_BestMatch.ParticleType 1
+GalTS_BestMatch.Beam FarFieldNormalizedEnergyBeamFluxFunction GalTS_BestMatch_input.dat
+GalTS_BestMatch.Spectrum NormalizedEnergyBeamFluxFunction
+GalTS_BestMatch.Orientation Galactic Fixed 90 180
+GalTS_BestMatch.FarFieldTransmissionProbability TransmissionProbability_33000.dat

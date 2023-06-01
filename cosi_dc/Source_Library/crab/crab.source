@@ -1,0 +1,7 @@
+DataChallenge.Source          crab
+crab.ParticleType               1
+crab.Beam                       FarFieldPointSource 0 0
+crab.Orientation                Galactic Fixed -5.78 184.56
+crab.Spectrum                   File crab_spec.dat
+crab.Flux                       0.048977
+crab.FarFieldTransmissionProbability  TransmissionProbability_33000.dat
