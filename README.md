@@ -25,12 +25,12 @@ See Source_Library for available sources. Let us know if you want any specific s
   $ pip install -e .
 
 3. Start a new analysis directory, and enter the commmand-line prompt:
-  $ new_sim
+  $ make_sim
    
 4. Specify inputs in inputs.yaml </b>
      
 5. Run setup script: 
-   $ python run_sim_setup.py
+  $ python run_sim_setup.py
   - This will setup the source directory and copy all needed files for running the code.
   
 6. To run the code:  </b>

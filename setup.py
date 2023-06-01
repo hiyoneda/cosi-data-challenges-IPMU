@@ -10,5 +10,5 @@ setup(
     author_email='christopher.m.karwin@nasa.gov',
     packages=find_packages(),
     description = "Pipeline for data challenge simulations.",
-    entry_points = {"console_scripts":["new_sim = cosi_dc.make_new_sim:main"]}
+    entry_points = {"console_scripts":["make_sim = cosi_dc.make_new_sim:main"]}
 )
