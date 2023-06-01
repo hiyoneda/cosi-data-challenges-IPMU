@@ -1,7 +1,0 @@
-DataChallenge.Source GalBrem
-
-GalBrem.ParticleType 1
-GalBrem.Beam FarFieldNormalizedEnergyBeamFluxFunction GalacticDiffuse_Brem.dat
-GalBrem.Spectrum NormalizedEnergyBeamFluxFunction
-GalBrem.Orientation Galactic Fixed 90 180
-GalBrem.FarFieldTransmissionProbability TransmissionProbability_33000.dat

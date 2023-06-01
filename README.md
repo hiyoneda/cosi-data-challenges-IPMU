@@ -18,30 +18,34 @@ See Source_Library for available sources. Let us know if you want any specific s
 ## Quickstart Guide <br /> 
 <pre>
 1. Download cosi-data-challenges directory:
-  - git clone https://github.com/ckarwin/cosi-data-challenges.git
-  - Add the Run_Data_Challenge directory to your python path.
-  - Note: This repository does not include the geometery file. 
+  $ git clone https://github.com/ckarwin/cosi-data-challenges.git
 
-2. For any new analysis, copy the following files to a new analysis directory: inputs.yaml, run_setup.py
+2. Install with pip:
+  $ cd cosi-data-challenges
+  $ pip install -e .
+
+3. Start a new analysis directory, and enter the commmand-line prompt:
+  $ new_sim
+   
+4. Specify inputs in inputs.yaml </b>
      
-3. Specify inputs in inputs.yaml </b>
-     
-4. Run setup script: python run_setup.py
+5. Run setup script: 
+   $ python run_sim_setup.py
   - This will setup the source directory and copy all needed files for running the code.
   
-5. To run the code:  </b>
+6. To run the code:  </b>
   - Uncomment the functions inside run_sims.py that you want to run.
   - The code can be ran directly from the terminal or submitted to a batch system.
   - To run from the terminal use python run_sims.py.
   - To run parallel jobs in cosima with numerous time bins use python run_parallel_sims.py. 
   - To submit a single job use python submit_jobs.py. 
 
-6. If running parallel jobs:
+7. If running parallel jobs:
   - In run_sims.py uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
   - After all the jobs finish, uncomment just the mimrec function in run_sims.py, then run: python submit_jobs.py.
 
-7. Note that the batch submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's specific batch system.
+8. Note that the batch submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's specific batch system.
 
 </pre>
 

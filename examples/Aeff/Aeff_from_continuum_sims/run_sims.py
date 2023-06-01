@@ -1,5 +1,5 @@
 # Imports:
-from calc_aeff import CalcAeff
+from cosi_dc.pipeline.calc_aeff import CalcAeff
 
 # Define instance with input parameter card:
 instance = CalcAeff("inputs.yaml")

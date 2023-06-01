@@ -1,8 +1,0 @@
-# The following values are from Knoedlseder+05.
-DataChallenge.Source GC511A_10xFlux
-GC511A_10xFlux.ParticleType           1
-GC511A_10xFlux.Beam                   FarFieldAssymetricGaussian 0 0 3.5 3.1 0
-GC511A_10xFlux.Orientation            Galactic Fixed 0.1 -0.6
-GC511A_10xFlux.Spectrum               Mono 511
-GC511A_10xFlux.Flux                   1.1e-2
-GC511A_10xFlux.FarFieldTransmissionProbability TransmissionProbability_33000.dat

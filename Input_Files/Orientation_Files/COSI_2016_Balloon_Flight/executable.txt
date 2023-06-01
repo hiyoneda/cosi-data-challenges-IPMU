@@ -1,2 +1,0 @@
-mimrec -g /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Input_Files/Geometry_Files/COSI_Balloon_Geometry_9Det/COSI.DetectorHead.geo.setup -c mimrec.cfg -f AllData.tra.gz
-
