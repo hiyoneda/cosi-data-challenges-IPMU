@@ -422,15 +422,15 @@ class RunDataChallenge:
         if extract_root == True:
             
             # Extract spectrum histogram:
-            extract_spectrum_file = os.path.join(self.dc_dir,"Run_Data_Challenge/ExtractSpectrum.cxx")
+            extract_spectrum_file = os.path.join(self.dc_dir,"pipeline/ExtractSpectrum.cxx")
             os.system("root -q -b %s" %extract_spectrum_file)
 
             # Extract light curve histogram:
-            extract_lc_file = os.path.join(self.dc_dir,"Run_Data_Challenge/ExtractLightCurve.cxx")
+            extract_lc_file = os.path.join(self.dc_dir,"pipeline/ExtractLightCurve.cxx")
             os.system("root -q -b %s" %extract_lc_file)
         
             # Extract image histogram:
-            extract_image_file = os.path.join(self.dc_dir,"Run_Data_Challenge/ExtractImage.cxx")
+            extract_image_file = os.path.join(self.dc_dir,"pipeline/ExtractImage.cxx")
             os.system("root -q -b %s" %extract_image_file)
 
         # Go home:
