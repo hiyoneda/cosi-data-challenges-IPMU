@@ -1,2 +1,4 @@
 cosi_dc.egg-info
 __pycache__
+crossections*
+*.pyc
