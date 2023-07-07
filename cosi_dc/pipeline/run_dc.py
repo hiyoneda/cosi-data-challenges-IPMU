@@ -58,6 +58,7 @@ class RunDataChallenge:
         self.src_list = inputs["src_list"]
         self.orientation_file = inputs["orientation_file"]
         self.lightcurve_file = inputs["lightcurve_file"]
+        self.lightcurve = inputs["lightcurve"]
         self.parallel_time_sims = inputs["parallel_time_sims"]
         self.num_sims = inputs["num_sims"]
         self.clear_sims = inputs["clear_sims"]
