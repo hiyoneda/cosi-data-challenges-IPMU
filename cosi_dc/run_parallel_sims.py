@@ -11,6 +11,8 @@ from cosi_dc.pipeline.run_dc import RunDataChallenge
 instance = RunDataChallenge("inputs.yaml")
 name = instance.name
 orientation_file = instance.orientation_file
+lightcurve_file = instance.lightcurve_file
+lightcurve = instance.lightcurve
 num_sims = instance.num_sims 
 clear = instance.clear_sims 
 mcosima = instance.mcosima
@@ -18,7 +20,7 @@ num_cores = instance.num_cores
 
 # Make orientation time bins:
 # Note: the function returns 0 or 1 depending if an extra file is needed (see for loop below).
-extra = make_bins(num_sims,orientation_file)
+extra = make_bins(num_sims,orientation_file,lightcurve_file,lightcurve)
 
 # Get working directory:
 home = os.getcwd()
@@ -51,6 +53,12 @@ for i in range(0,num_sims+extra):
     this_ori_file = os.path.join(this_ori_path,this_ori_name)
     shutil.copy2(this_ori_file, 'GalacticScan.ori')
 
+    if lightcurve :
+        # Copy lightcurve file for ith time bin:
+        this_lc_name = "bin_%s.dat" %str(i)
+        this_lc_file = os.path.join(this_ori_path,this_lc_name)
+        shutil.copy2(this_lc_file, 'lightcurve.dat')
+    
     # Write batch submission file:
     f = open('multiple_batch_submission.pbs','w')
     f.write("#PBS -N sim_%s\n" %str(i))
