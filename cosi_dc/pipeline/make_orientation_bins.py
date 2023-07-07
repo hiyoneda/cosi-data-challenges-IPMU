@@ -8,10 +8,11 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
     lines = f.readlines()
     f.close()
 
-    # Upload main light curve file:
-    f1 = open(lightcurve_file,"r")
-    lines1 = f1.readlines()
-    f1.close()
+    if lightcurve_file is not None :
+        # Upload main light curve file:
+        f1 = open(lightcurve_file,"r")
+        lines1 = f1.readlines()
+        f1.close()
 
     
     # Make orientation bin directory:
@@ -20,8 +21,11 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
 
     # Determine number of lines per file:
     num_lines_tot = len(lines) - 1
-    num_lines_tot_LC = len(lines1) - 1
-    assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
+
+    if lightcurve_file is not None :
+        num_lines_tot_LC = len(lines1) - 1
+        assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
+        
     num_lines_bin = num_lines_tot/num_bins
     num_lines_bin = int(num_lines_bin) #rounds down to nearest integer
     
@@ -37,10 +41,12 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
         g = open(this_file,"w")
         g.write(lines[0])
 
-        #light curve file
-        this_file1 = "Orientation_Bins/bin_%s.dat" %str(k)
-        g1 = open(this_file1,"w")
-        g1.write(lines1[0])
+        if lightcurve_file is not None :
+
+            #light curve file
+            this_file1 = "Orientation_Bins/bin_%s.dat" %str(k)
+            g1 = open(this_file1,"w")
+            g1.write(lines1[0])
 
         
         low = num_lines_bin*k+1
@@ -48,10 +54,14 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
     
         for i in range(low,high+1):
             g.write(lines[i])
-            g1.write(lines1[i])
+            
+            if lightcurve_file is not None :
+                g1.write(lines1[i])
 
         g.close()
-        g1.close()
+
+        if lightcurve_file is not None :
+            g1.close()
         
     # Write last orientation file if num_lines_bin is not integer:
     # Note: function returns 0 or 1 depending if an extra file is needed.
@@ -62,17 +72,22 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
         this_file = "Orientation_Bins/bin_%s.ori" %str(num_bins)
         g = open(this_file,"w")
         g.write(lines[0])
-
-        #lightcurve
-        this_file1 = "Orientation_Bins/bin_%s.dat" %str(num_bins)
-        g1 = open(this_file1,"w")
-        g1.write(lines1[0])
+    
+        if lightcurve_file is not None :
+            #lightcurve
+            this_file1 = "Orientation_Bins/bin_%s.dat" %str(num_bins)
+            g1 = open(this_file1,"w")
+            g1.write(lines1[0])
         
         for i in range(high,num_lines_tot+1):
             g.write(lines[i])
-            g1.write(lines1[i])
+
+            if lightcurve_file is not None :
+                g1.write(lines1[i])
         g.close()
-        g1.close()
+
+        if lightcurve_file is not None :
+            g1.close()
         
         extra = 1
     
