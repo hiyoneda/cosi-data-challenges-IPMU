@@ -11,6 +11,8 @@ orientation_file: "/full/path/GalacticScan.ori"
 
 #Full path to light curve file :
 lightcurve_file : "/full/path/Lightcurve.dat"
+#if you want to use lightcurve in your sim (needed for DC2)
+lightcurve : True
 
 # Transmission probability:
 include_transmission_prob: True # True or False
