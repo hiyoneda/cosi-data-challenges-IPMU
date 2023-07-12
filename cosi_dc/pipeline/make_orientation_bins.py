@@ -23,7 +23,7 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
     num_lines_tot = len(lines) - 1
 
     if lightcurve_file is not None :
-        num_lines_tot_LC = len(lines1) - 1
+        num_lines_tot_LC = len(lines1) - 2
         assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
         
     num_lines_bin = num_lines_tot/num_bins
