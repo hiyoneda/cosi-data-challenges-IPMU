@@ -21,7 +21,7 @@ class MakePlots:
         """
         
         # Setup figure:
-        fig = plt.figure(figsize=(9,6))
+        fig = plt.figure(figsize=(9,6.5))
         ax = plt.gca()
 
         # Main plot:
@@ -37,11 +37,11 @@ class MakePlots:
             plt.errorbar(x, y, xerr=x_error, **plot_kwargs)
 
         # axes and labels:
-        plt.xticks(fontsize=12)
-        plt.yticks(fontsize=12)
+        plt.xticks(fontsize=15)
+        plt.yticks(fontsize=15)
         plt.grid(color="grey",alpha=0.3,ls="--")
-        ax.xaxis.label.set_size(14)
-        ax.yaxis.label.set_size(14)
+        ax.xaxis.label.set_size(18)
+        ax.yaxis.label.set_size(18)
         ax.set(**fig_kwargs)
         if "label" in plot_kwargs.keys():
             plt.legend(loc=1,frameon=True)
