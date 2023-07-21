@@ -20,7 +20,7 @@ num_cores = instance.num_cores
 
 # Make orientation time bins:
 # Note: the function returns 0 or 1 depending if an extra file is needed (see for loop below).
-extra = make_bins(num_sims,orientation_file,lightcurve_file,lightcurve)
+extra = make_bins(num_sims,orientation_file,lightcurve,lightcurve_file)
 
 # Get working directory:
 home = os.getcwd()
