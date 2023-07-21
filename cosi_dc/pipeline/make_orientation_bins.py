@@ -12,6 +12,8 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
         # Upload main light curve file:
         f1 = open(lightcurve_file,"r")
         lines1 = f1.readlines()
+        #remove fst and lst line
+        lines1 = lines1[1:-1]
         f1.close()
 
     
@@ -24,7 +26,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
 
     if lightcurve :
         num_lines_tot_LC = len(lines1) - 2
-        assert len(lines) == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
+        assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
         assert lines[0].split(" ")[1] == lines1[1].split(" ")[1] and lines[-1].split(" ")[1] == lines1[-2].split(" ")[1], "Start/stop time are different between LC and ori file"
         assert float(lines[1].split(" ")[1]) - float(lines[0].split(" ")[1]) == float(lines1[2].split(" ")[1]) - float(lines1[1].split(" ")[1]) , "Time binning is different between LC and ori file"
     
@@ -48,7 +50,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
             #light curve file
             this_file1 = "Orientation_Bins/bin_%s.dat" %str(k)
             g1 = open(this_file1,"w")
-            g1.write(lines1[0])
+            g1.write("IP LinLin\n")
 
         
         low = num_lines_bin*k+1
@@ -63,6 +65,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
         g.close()
 
         if lightcurve :
+            g1.write("EN\n")
             g1.close()
         
     # Write last orientation file if num_lines_bin is not integer:
@@ -89,6 +92,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
         g.close()
 
         if lightcurve :
+            g1.write("EN\n")
             g1.close()
         
         extra = 1
