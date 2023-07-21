@@ -1,14 +1,14 @@
 # Imports:
 import os
 
-def make_bins(num_bins,orientation_file,lightcurve_file=None):
+def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
 
     # Upload main orientation file:
     f = open(orientation_file,"r")
     lines = f.readlines()
     f.close()
 
-    if lightcurve_file is not None :
+    if lightcurve :
         # Upload main light curve file:
         f1 = open(lightcurve_file,"r")
         lines1 = f1.readlines()
@@ -22,7 +22,7 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
     # Determine number of lines per file:
     num_lines_tot = len(lines) - 1
 
-    if lightcurve_file is not None :
+    if lightcurve :
         num_lines_tot_LC = len(lines1) - 2
         assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
         
@@ -41,7 +41,7 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
         g = open(this_file,"w")
         g.write(lines[0])
 
-        if lightcurve_file is not None :
+        if lightcurve :
 
             #light curve file
             this_file1 = "Orientation_Bins/bin_%s.dat" %str(k)
@@ -55,12 +55,12 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
         for i in range(low,high+1):
             g.write(lines[i])
             
-            if lightcurve_file is not None :
+            if lightcurve :
                 g1.write(lines1[i])
 
         g.close()
 
-        if lightcurve_file is not None :
+        if lightcurve :
             g1.close()
         
     # Write last orientation file if num_lines_bin is not integer:
@@ -73,7 +73,7 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
         g = open(this_file,"w")
         g.write(lines[0])
     
-        if lightcurve_file is not None :
+        if lightcurve :
             #lightcurve
             this_file1 = "Orientation_Bins/bin_%s.dat" %str(num_bins)
             g1 = open(this_file1,"w")
@@ -82,11 +82,11 @@ def make_bins(num_bins,orientation_file,lightcurve_file=None):
         for i in range(high,num_lines_tot+1):
             g.write(lines[i])
 
-            if lightcurve_file is not None :
+            if lightcurve :
                 g1.write(lines1[i])
         g.close()
 
-        if lightcurve_file is not None :
+        if lightcurve :
             g1.close()
         
         extra = 1
