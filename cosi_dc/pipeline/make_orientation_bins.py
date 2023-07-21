@@ -25,9 +25,10 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
     num_lines_tot = len(lines) - 1
 
     if lightcurve :
-        num_lines_tot_LC = len(lines1) - 2
-        assert lines[0].split(" ")[1] == lines1[1].split(" ")[1] and lines[-1].split(" ")[1] == lines1[-2].split(" ")[1], "Start/stop time are different between LC and ori file"
-        assert float(lines[1].split(" ")[1]) - float(lines[0].split(" ")[1]) == float(lines1[2].split(" ")[1]) - float(lines1[1].split(" ")[1]) , "Time binning is different between LC and ori file"
+        num_lines_tot_LC = len(lines1) 
+        assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
+        assert lines[1].split(" ")[1] == lines1[0].split(" ")[1] and lines[-1].split(" ")[1] == lines1[-1].split(" ")[1], "Start/stop time are different between LC and ori file"
+        assert float(lines[2].split(" ")[1]) - float(lines[1].split(" ")[1]) == float(lines1[1].split(" ")[1]) - float(lines1[0].split(" ")[1]) , "Time binning is different between LC and ori file"
     
     num_lines_bin = num_lines_tot/num_bins
     num_lines_bin = int(num_lines_bin) #rounds down to nearest integer
@@ -59,7 +60,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
             g.write(lines[i])
             
             if lightcurve :
-                g1.write(lines1[i])
+                g1.write(lines1[i-1])
 
         g.close()
 
@@ -81,13 +82,13 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
             #lightcurve
             this_file1 = "Orientation_Bins/bin_%s.dat" %str(num_bins)
             g1 = open(this_file1,"w")
-            g1.write(lines1[0])
+            g1.write("IP LinLin\n")
         
         for i in range(high,num_lines_tot+1):
             g.write(lines[i])
 
             if lightcurve :
-                g1.write(lines1[i])
+                g1.write(lines1[i-1])
         g.close()
 
         if lightcurve :
