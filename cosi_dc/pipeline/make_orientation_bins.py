@@ -26,7 +26,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
         num_lines_tot_LC = len(lines1) - 2
         assert len(lines) == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
         assert lines[0].split(" ")[1] == lines1[1].split(" ")[1] and lines[-1].split(" ")[1] == lines1[-2].split(" ")[1], "Start/stop time are different between LC and ori file"
-        assert lines[1].split(" ")[1] - lines[0].split(" ")[1] == lines1[2].split(" ")[1] - lines1[1].split(" ")[1] , "Time binning is different between LC and ori file"
+        assert float(lines[1].split(" ")[1]) - float(lines[0].split(" ")[1]) == float(lines1[2].split(" ")[1]) - float(lines1[1].split(" ")[1]) , "Time binning is different between LC and ori file"
     
     num_lines_bin = num_lines_tot/num_bins
     num_lines_bin = int(num_lines_bin) #rounds down to nearest integer
