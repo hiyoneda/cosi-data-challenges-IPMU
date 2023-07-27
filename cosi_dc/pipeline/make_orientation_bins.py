@@ -22,12 +22,12 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
         os.system("mkdir Orientation_Bins")
 
     # Determine number of lines per file:
-    num_lines_tot = len(lines) - 1
+    num_lines_tot = len(lines) - 2
 
     if lightcurve :
         num_lines_tot_LC = len(lines1) 
-        assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file"
-        assert lines[1].split(" ")[1] == lines1[0].split(" ")[1] and lines[-1].split(" ")[1] == lines1[-1].split(" ")[1], "Start/stop time are different between LC and ori file"
+        assert num_lines_tot == num_lines_tot_LC , "The number of lines is not equal betwneen the ori and light curve file {0} vs {1}".format(num_lines_tot,num_lines_tot_LC) 
+        assert lines[1].split(" ")[1] == lines1[0].split(" ")[1] and lines[-2].split(" ")[1] == lines1[-1].split(" ")[1], "Start/stop time are different between LC and ori file"
         assert float(lines[2].split(" ")[1]) - float(lines[1].split(" ")[1]) == float(lines1[1].split(" ")[1]) - float(lines1[0].split(" ")[1]) , "Time binning is different between LC and ori file"
     
     num_lines_bin = num_lines_tot/num_bins
@@ -62,6 +62,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
             if lightcurve :
                 g1.write(lines1[i-1])
 
+        g.write("EN\n")
         g.close()
 
         if lightcurve :
@@ -89,6 +90,8 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
 
             if lightcurve :
                 g1.write(lines1[i-1])
+        
+        g.write("EN\n")        
         g.close()
 
         if lightcurve :
