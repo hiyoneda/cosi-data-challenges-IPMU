@@ -4,7 +4,7 @@ All sources from COSI's data challenges are available here. Sources must be spec
 ## Data Challenge 1 (DC1) <br /> 
 DC1/crab <br />
 DC1/crab_10xFlux <br />
-DC1/cen <br />
+DC1/cenA <br />
 DC1/cenA_10xFlux <br />
 DC1/vela <br />
 DC1/vela_10xFlux <br />
