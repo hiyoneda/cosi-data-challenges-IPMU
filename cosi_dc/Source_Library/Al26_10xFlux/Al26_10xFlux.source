@@ -1,7 +1,0 @@
-DataChallenge.Source Al26_10xFlux
-
-Al26_10xFlux.ParticleType 1
-Al26_10xFlux.Beam FarFieldNormalizedEnergyBeamFluxFunction scaled_10x_AllSky_Al26_NormInnerGalaxyDiehl_DIRBE240um.dat
-Al26_10xFlux.Spectrum NormalizedEnergyBeamFluxFunction
-Al26_10xFlux.Orientation Galactic Fixed 90 180
-Al26_10xFlux.FarFieldTransmissionProbability TransmissionProbability_33000.dat

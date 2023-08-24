@@ -1,7 +1,0 @@
-DataChallenge.Source          vela_10xFlux
-vela_10xFlux.ParticleType               1
-vela_10xFlux.Beam                       FarFieldPointSource 0 0
-vela_10xFlux.Orientation                Galactic Fixed -2.787 263.552
-vela_10xFlux.Spectrum                   File vela_10xFlux_spec.dat
-vela_10xFlux.Flux                       0.0012000000000000001
-vela_10xFlux.FarFieldTransmissionProbability  TransmissionProbability_33000.dat

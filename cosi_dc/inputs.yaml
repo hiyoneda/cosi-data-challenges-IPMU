@@ -20,7 +20,7 @@ revan_config: "/full/path/ContinuumResponse_cori_v1v2_nuclearizer_12Det_200812_i
 mimrec_config: "/full/path/ContinuumResponse_cori_v1v2_nuclearizer_12Det_200812_imaging_atmos_9Det_6deg_10ebins.mimrec.cfg"
 
 # Sources to be simulated:
-src_list: ["crab"]
+src_list: ["DC1/crab"]
 
 name: "GalacticScan" # Name of run.
 time: 1467477167.821758700 # Exposure time in seconds.
