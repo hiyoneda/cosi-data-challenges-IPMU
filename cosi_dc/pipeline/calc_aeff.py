@@ -246,8 +246,8 @@ class CalcAeff(RunDataChallenge):
         df_data = pd.read_csv(input_data, delim_whitespace=True)
         flux_data = df_data["src_ct/keV"] # ph/keV
         bin_width = df_data["BW[keV]"] # keV
-        self.elow = df_data["EL[keV]"]
-        self.ehigh = df_data["EH[keV]"]
+        self.elow = df_data["EL[keV]"] 
+        self.ehigh = df_data["EH[keV]"] 
         self.emean = np.sqrt(self.elow*self.ehigh) # geometric mean of energy bin 
         xerr_low = self.emean - self.elow
         xerr_high = self.ehigh - self.emean
@@ -429,7 +429,7 @@ class CalcAeff(RunDataChallenge):
         fig_kwargs = {"xlabel":"Energy [keV]", \
                 "ylabel":r"Effective Area [$\mathrm{cm^{2}}$]",\
                 "yscale":"linear","ylim":(0,1.3*np.max(self.A_eff))}
-        
+    
         MakePlots().make_basic_plot(self.emean, self.A_eff, x_error=self.xerr,\
                 plot_kwargs=plot_kwargs, fig_kwargs=fig_kwargs,\
                 savefig="Output/Aeff.pdf")

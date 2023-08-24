@@ -69,11 +69,11 @@ class Setup:
             beam_type = "None"
        
             # Initiate source name:
-            this_name = each
+            this_name = os.path.basename(each)
 
             # Get source from source library:
             this_src_dir = os.path.join(self.dc_dir,"Source_Library",each)
-            this_src = each + ".source"
+            this_src = this_name + ".source"
             this_src_file = os.path.join(this_src_dir,this_src)
    
             # Open source file for reading:

@@ -1,0 +1,7 @@
+DataChallenge.Source          cygX1
+cygX1.ParticleType               1
+cygX1.Beam                       FarFieldPointSource 0 0
+cygX1.Orientation                Galactic Fixed 3.066917 71.33496
+cygX1.Spectrum                   File cygX1_spec.dat
+cygX1.Flux                       0.040644
+cygX1.FarFieldTransmissionProbability  TransmissionProbability_33000.dat

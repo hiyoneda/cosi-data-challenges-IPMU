@@ -1,0 +1,7 @@
+DataChallenge.Source GalIC
+
+GalIC.ParticleType 1
+GalIC.Beam FarFieldNormalizedEnergyBeamFluxFunction GalacticDiffuse_IC.dat
+GalIC.Spectrum NormalizedEnergyBeamFluxFunction
+GalIC.Orientation Galactic Fixed 90 180
+GalIC.FarFieldTransmissionProbability TransmissionProbability_33000.dat

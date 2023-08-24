@@ -1,7 +1,0 @@
-DataChallenge.Source GalTotal_SA100_F98
-
-GalTotal_SA100_F98.ParticleType 1
-GalTotal_SA100_F98.Beam FarFieldNormalizedEnergyBeamFluxFunction GalTotal_SA100_F98_input.dat
-GalTotal_SA100_F98.Spectrum NormalizedEnergyBeamFluxFunction
-GalTotal_SA100_F98.Orientation Galactic Fixed 90 180
-GalTotal_SA100_F98.FarFieldTransmissionProbability TransmissionProbability_33000.dat
