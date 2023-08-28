@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 # Setup:
 setup(
     name='cosi_dc',
-    version="dev",
+    version="0.0.1",
     url='https://github.com/cositools/cosi-data-challenges.git',
     author='COSI Team',
     author_email='christopher.m.karwin@nasa.gov',
