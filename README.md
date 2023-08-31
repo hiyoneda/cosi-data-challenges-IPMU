@@ -18,7 +18,7 @@ See Source_Library for available sources. Let us know if you want any specific s
 ## Quickstart Guide <br /> 
 <pre>
 1. Download cosi-data-challenges directory:
-  $ git clone https://github.com/ckarwin/cosi-data-challenges.git
+  $ git clone https://github.com/cositools/cosi-data-challenges.git
 
 2. Install with pip:
   $ cd cosi-data-challenges
