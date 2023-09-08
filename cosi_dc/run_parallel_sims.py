@@ -11,6 +11,8 @@ from cosi_dc.pipeline.run_dc import RunDataChallenge
 instance = RunDataChallenge("inputs.yaml")
 name = instance.name
 orientation_file = instance.orientation_file
+lightcurve_file = instance.lightcurve_file
+lightcurve = instance.lightcurve
 num_sims = instance.num_sims 
 run_type = instance.run_type
 clear = instance.clear_sims 
@@ -19,7 +21,7 @@ num_cores = instance.num_cores
 
 # Make orientation time bins:
 # Note: the function returns 0 or 1 depending if an extra file is needed (see for loop below).
-extra = make_bins(num_sims,orientation_file)
+extra = make_bins(num_sims,orientation_file,lightcurve,lightcurve_file)
 
 # Get working directory:
 home = os.getcwd()
