@@ -52,6 +52,30 @@ for i in range(0,num_sims+extra):
     this_ori_file = os.path.join(this_ori_path,this_ori_name)
     shutil.copy2(this_ori_file, 'GalacticScan.ori')
 
+    if lightcurve :
+        # Copy lightcurve file for ith time bin:
+        this_lc_name = "bin_%s.dat" %str(i)
+        this_lc_file = os.path.join(this_ori_path,this_lc_name)
+        shutil.copy2(this_lc_file, 'lightcurve.dat')
+    
+    # Write batch submission file:
+    f = open('multiple_batch_submission.pbs','w')
+    f.write("#PBS -N sim_%s\n" %str(i))
+    f.write("#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=48:00:00\n\n")
+    f.write("#the MEGAlib environment first needs to be sourced:\n")
+    f.write("cd /zfs/astrohe/Software\n")
+    f.write("source COSIMain_u2.sh\n\n")
+    f.write("#change to working directory and run job\n")
+    f.write("cd %s\n" %new_dir)
+    f.write("python run_sims.py")
+    f.close()
+    
+    # Submit job:
+    os.system("qsub multiple_batch_submission.pbs")
+
+    # Sleep a bit in order to not overwhelm batch system:
+    time.sleep(3)
+
     # Return home:
     os.chdir(home)
 
