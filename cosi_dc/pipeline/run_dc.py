@@ -109,6 +109,10 @@ class RunDataChallenge:
         # Move orientation file if running parallel jobs:
         if os.path.exists("GalacticScan.ori"):
             os.system("mv GalacticScan.ori Output")
+        
+        # Also need to move LC file for parallel jobs:
+        if self.lightcurve == True:
+            os.system("mv lightcurve.dat Output")
 
         # Need to update name of orientation file if running parallel time sims:
         if self.parallel_time_sims == True:

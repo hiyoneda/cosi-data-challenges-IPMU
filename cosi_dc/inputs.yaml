@@ -9,10 +9,6 @@ geometry_file: "/full/path/COSI.DetectorHead.geo.setup"
 # Full path to orientation file:
 orientation_file: "/full/path/GalacticScan.ori"
 
-# Option to use a lightcurve in your sim:
-lightcurve: True # True or False
-lightcurve_file: "/full/path/Lightcurve.dat" # full path
-
 # Transmission probability:
 include_transmission_prob: True # True or False
 transmission_prob_file: "/full/path/TransmissionProbability_33000.dat"
@@ -38,6 +34,11 @@ parallel_time_sims: True # True or False
 num_sims: 200 # Number of time bins to use:
 clear_sims: True # Remove existing simulation directories and write new ones. 
 run_type: "gnu_parallel" # "mult_nodes" or "gnu_parallel"
+
+# Option to use a lightcurve in your sim with parallel time bins:
+# Note: If True, LC and ori files must have same time binning. 
+lightcurve: True # True or False
+lightcurve_file: "/full/path/Lightcurve.dat" # full path
 
 # Option to run mcosima:
 mcosima: False # True or False
