@@ -70,6 +70,15 @@ class Setup:
        
             # Initiate source name:
             this_name = os.path.basename(each)
+        
+            # Exit it not using source from source library:
+            if this_name == "other":
+                f = open("README.txt","w")
+                f.write("Using source file outside of library.\n")
+                f.write("The source file still needs to be copied to this directory!\n")
+                f.write("Make sure that name in input file matches name of source file.")
+                f.close()
+                break
 
             # Get source from source library:
             this_src_dir = os.path.join(self.dc_dir,"Source_Library",each)

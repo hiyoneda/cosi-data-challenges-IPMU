@@ -20,5 +20,6 @@
 'Galdiff/GalTS_Baseline',
 'Galdiff/GalTS_BestMatch',
 'DC2/proto_dc2/gruber99',
-'DC2/proto_dc2/gruber99_LEO'
+'DC2/proto_dc2/gruber99_LEO',
+'other'
 ]

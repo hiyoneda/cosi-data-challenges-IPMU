@@ -33,6 +33,7 @@ run_nuc: True
 parallel_time_sims: True # True or False
 num_sims: 200 # Number of time bins to use:
 clear_sims: True # Remove existing simulation directories and write new ones. 
+run_type: "gnu_parallel" # "mult_nodes" or "gnu_parallel"
 
 # Option to run mcosima:
 mcosima: False # True or False
