@@ -28,3 +28,8 @@ Galdiff/GalBrem <br />
 Galdiff/GalTotal_SA100_F98 <br />
 Galdiff/GalTS_Baseline <br />
 Galdiff/GalTS_BestMatch <br />
+
+## Using your own sources:
+To use your own sources specifiy 'other' in the input yaml source list.  <br />
+The source files must still be copied to the source directory of the run, and all corresponding paths need to be correct. <br />
+When running define_sim (in run_sims.py) you need to pass 'external_src=True'.
