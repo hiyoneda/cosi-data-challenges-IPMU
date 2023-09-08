@@ -74,7 +74,7 @@ class Setup:
             # Exit it not using source from source library:
             if this_name == "other":
                 f = open("README.txt","w")
-                f.write("Using source file outside of library.\n")
+                f.write("Using own source file.\n")
                 f.write("The source file still needs to be copied to this directory!\n")
                 f.write("Make sure that name in input file matches name of source file.")
                 f.close()
