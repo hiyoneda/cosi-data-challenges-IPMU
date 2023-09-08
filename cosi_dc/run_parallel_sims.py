@@ -12,6 +12,7 @@ instance = RunDataChallenge("inputs.yaml")
 name = instance.name
 orientation_file = instance.orientation_file
 num_sims = instance.num_sims 
+run_type = instance.run_type
 clear = instance.clear_sims 
 mcosima = instance.mcosima
 num_cores = instance.num_cores
@@ -51,26 +52,42 @@ for i in range(0,num_sims+extra):
     this_ori_file = os.path.join(this_ori_path,this_ori_name)
     shutil.copy2(this_ori_file, 'GalacticScan.ori')
 
-    # Write batch submission file:
-    f = open('multiple_batch_submission.pbs','w')
-    f.write("#PBS -N sim_%s\n" %str(i))
-    f.write("#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=48:00:00\n\n")
-    f.write("#the MEGAlib environment first needs to be sourced:\n")
-    f.write("cd /zfs/astrohe/Software\n")
-    f.write("source COSIMain_u2.sh\n\n")
-    f.write("#change to working directory and run job\n")
-    f.write("cd %s\n" %new_dir)
-    f.write("python run_sims.py")
-    f.close()
+    if run_type == "mult_nodes":
     
-    # Submit job:
-    os.system("qsub multiple_batch_submission.pbs")
+        # Write batch submission file:
+        f = open('multiple_batch_submission.pbs','w')
+        f.write("#PBS -N sim_%s\n" %str(i))
+        f.write("#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=48:00:00\n\n")
+        f.write("#the MEGAlib environment first needs to be sourced:\n")
+        f.write("cd /zfs/astrohe/Software\n")
+        f.write("source COSIMain_u2.sh\n\n")
+        f.write("#change to working directory and run job\n")
+        f.write("cd %s\n" %new_dir)
+        f.write("python run_sims.py")
+        f.close()
+    
+        # Submit job:
+        os.system("qsub multiple_batch_submission.pbs")
 
-    # Sleep a bit in order to not overwhelm batch system:
-    time.sleep(3)
+        # Sleep a bit in order to not overwhelm batch system:
+        time.sleep(3)
 
     # Return home:
     os.chdir(home)
+
+if run_type == "gnu_parallel":
+
+    f = open('gnu_parallel.sh','w')
+    f.write('#PBS -N parallel\n')
+    f.write('#PBS -l select=50:ncpus=10:mem=50gb:interconnect=1g,walltime=48:00:00\n\n')
+    f.write('#the MEGAlib environment first needs to be sourced:\n')
+    f.write('cd /zfs/astrohe/Software\n')
+    f.write('source COSIMain_u2.sh\n')
+    f.write('module add gnu-parallel\n\n')
+    f.write('#change to home directory and run job\n')
+    f.write('cd %s\n' %home)
+    f.write('parallel --delay=5 -j%s python gnu_parallel.py ::: {0..%s}' %(str(num_sims+extra),str(num_sims+extra-1)))
+    f.close()
 
 # Make main output directory:
 os.system("mkdir Output")

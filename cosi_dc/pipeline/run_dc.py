@@ -59,6 +59,7 @@ class RunDataChallenge:
         self.orientation_file = inputs["orientation_file"]
         self.parallel_time_sims = inputs["parallel_time_sims"]
         self.num_sims = inputs["num_sims"]
+        self.run_type = inputs["run_type"]
         self.clear_sims = inputs["clear_sims"]
         self.src_lib = os.path.join(self.dc_dir,"Source_Library")
         self.run_nuc = inputs["run_nuc"]
@@ -72,7 +73,7 @@ class RunDataChallenge:
         self.include_transmission_prob = inputs["include_transmission_prob"]
         self.transmission_prob_file = inputs["transmission_prob_file"]
 
-    def define_sim(self):
+    def define_sim(self, external_src=False):
 
         """
         This function makes the main source file for the simulation. 
@@ -80,6 +81,10 @@ class RunDataChallenge:
         The input source list is passed from inputs.yaml,
         and it must be a list of strings, where each string is from 
         the available options.
+        
+        Optional input: 
+        external_src: Option to use source outside of source library. 
+            - True or False; default is False.
         """
 
         # Make print statement:
@@ -108,32 +113,40 @@ class RunDataChallenge:
             orientation_file = "GalacticScan.ori"
         else: orientation_file = self.orientation_file
 
-        # Write source file:
-        f = open(os.path.join("Output",self.source_file),"w")
-        f.write("#Source file for data challenge\n")
-        f.write("#The detector rotates in the Galactic coordiante system as given in the ori file.\n")
-        f.write("#The point sources are fixed in Galactic coordinates.\n\n")
-        f.write("#geometry file\n")
-        f.write("Version         1\n")
-        f.write("Geometry %s\n\n" %self.geo_file)
-        f.write("#Physics list\n")
-        f.write("PhysicsListEM                        LivermorePol\n\n")
-        f.write("#Output formats\n")
-        f.write("StoreSimulationInfo                  init-only\n\n")
-        f.write("#Define run:\n")
-        f.write("Run DataChallenge\n")
-        f.write("DataChallenge.FileName               %s\n" %self.name)
-        f.write("DataChallenge.Time                   %s\n" %self.time)
-        f.write("DataChallenge.OrientationSky         Galactic File NoLoop %s\n\n" %orientation_file)
+        # Option to use source outside of library:
+        if external_src == True:
+            src_files = os.path.join(self.run_dir,"Sources","*.source")
+            os.system("scp %s %s" %(src_files,"./Output"))
+
+        if external_src == False:
+           
+            # Write source file:
+            f = open(os.path.join("Output",self.source_file),"w")
+            f.write("#Source file for data challenge\n")
+            f.write("#The detector rotates in the Galactic coordiante system as given in the ori file.\n")
+            f.write("#The point sources are fixed in Galactic coordinates.\n\n")
+            f.write("#geometry file\n")
+            f.write("Version         1\n")
+            f.write("Geometry %s\n\n" %self.geo_file)
+            f.write("#Physics list\n")
+            f.write("PhysicsListEM                        LivermorePol\n\n")
+            f.write("#Output formats\n")
+            f.write("StoreSimulationInfo                  init-only\n\n")
+            f.write("#Define run:\n")
+            f.write("Run DataChallenge\n")
+            f.write("DataChallenge.FileName               %s\n" %self.name)
+            f.write("DataChallenge.Time                   %s\n" %self.time)
+            f.write("DataChallenge.OrientationSky         Galactic File NoLoop %s\n\n" %orientation_file)
         
-        # Add sources:
-        for each in self.src_list:
+            # Add sources:
+            for each in self.src_list:
+
+                this_name = os.path.basename(each)
+                this_src = os.path.join(self.run_dir, "Sources" ,this_name + ".source")
+                f.write("#include %s\n" %each)
+                f.write("Include %s\n\n" %this_src)
             
-            this_src = os.path.join(self.run_dir, "Sources" ,each + ".source")
-            f.write("#include %s\n" %each)
-            f.write("Include %s\n\n" %this_src)
-            
-        f.close()
+            f.close()
     
         return
     
@@ -142,7 +155,10 @@ class RunDataChallenge:
         """
         input definitions:
         
-        seed: Optional input. Specify seed to be used in simulations for reproducing results.
+        seed: Specify seed to be used in simulations for reproducing results.
+            - Default is no seed. 
+        verbosity: Verbosity level of cosima output. 
+            - Default is same as cosima default (0). 
         """
 
         # Make print statement:
