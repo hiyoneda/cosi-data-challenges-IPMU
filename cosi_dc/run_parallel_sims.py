@@ -84,6 +84,24 @@ for i in range(0,num_sims+extra):
     # Return home:
     os.chdir(home)
 
+if run_type == "array_job":
+
+    f = open('array_job.sh','w')
+    f.write('#PBS -N array\n')
+    f.write('#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=25:00:00\n')
+    f.write('#PBS -J 0-%s\n\n' %str(num_sims))
+    f.write('#Need to delay job start times by random number to prevent overloading system:\n')
+    f.write('sleep `expr $RANDOM % 60`\n\n')
+    f.write('#The MEGAlib environment first needs to be sourced:\n')
+    f.write('cd $tmp/zfs/astrohe/Software\n')
+    f.write('source COSIMain_u2.sh\n\n')
+    f.write('#Change to home directory and run job\n')
+    f.write('cd $PBS_O_WORKDIR\n')
+    f.write('scp run_sims.py inputs.yaml Simulations/sim_$PBS_ARRAY_INDEX\n')
+    f.write('cd Simulations/sim_$PBS_ARRAY_INDEX\n')
+    f.write('python run_sims.py')
+    f.close()
+
 if run_type == "gnu_parallel":
 
     f = open('gnu_parallel.sh','w')

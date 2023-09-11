@@ -29,6 +29,7 @@ import matplotlib.pyplot as plt
 import math
 import gzip
 import cosi_dc
+import gc
 ######################
 
 
@@ -217,6 +218,33 @@ class RunDataChallenge:
         os.system("msimconcatter %s" %cat_string)
         
         return
+
+    def check_cosima_parallel(self):
+
+        """Check that all cosima jobs converged, and get mean cpu time."""
+
+        cpu_list = []
+        for i in range(0,self.num_sims):
+            this_file = "Simulations/sim_%s/Output/cosima_terminal_output.txt" %str(i)
+            f = open(this_file,"r")
+            lines = f.readlines()
+            cpu_line = lines[len(lines)-7]
+            split = cpu_line.split()
+            print()
+            print(i)
+            print(float(split[6])/60.0)
+            cpu_list.append(float(split[6])/60.0)
+            gc.collect()
+        cpu_list = np.array(cpu_list)
+        mean = np.mean(cpu_list)
+
+        # Plot:
+        plt.plot(cpu_list,ls="-",marker="",color="black",label="run")
+        plt.axhline(y=mean, color="cornflowerblue", ls="--",label="mean")
+        plt.xlabel("Time Bin", fontsize=14)
+        plt.ylabel("CPU Time [min]", fontsize=14)
+        plt.savefig("cpu_time.pdf")
+        plt.show() 
 
     def run_nuclearizer(self, geo_file="default"):
         
