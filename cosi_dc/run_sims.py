@@ -7,6 +7,7 @@ instance = RunDataChallenge("inputs.yaml")
 # Generate tra file for simulation challenge:
 instance.define_sim()
 instance.run_cosima()
+instance.check_cosima_parallel()
 instance.run_nuclearizer()
 instance.run_revan()
 instance.run_mimrec(extract_root=True)

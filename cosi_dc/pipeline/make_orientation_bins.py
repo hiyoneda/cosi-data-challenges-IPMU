@@ -1,6 +1,7 @@
 # Imports:
 import os
 
+
 def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
 
     # Upload main orientation file:
@@ -36,6 +37,17 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
     # Need to include one additional file if num_lines_bin is not integer:
     remainder = num_lines_tot % num_bins
     is_divisible = remainder == 0
+    
+    # Make sure remainder isn't too high:
+    if remainder > num_lines_bin:
+        print()
+        print("###WARNING###")
+        print("total lines in file: " + str(num_lines_tot))
+        print("# of lines per time bin: " + str(num_lines_bin))
+        print("# of remaining lines: " + str(remainder))
+        print("Note: If the remainder is too large,")
+        print("then try changing the total lines a little!")
+        print()
 
     # Make orientation and light curve files:
     for k in range(0,num_bins):
@@ -72,7 +84,7 @@ def make_bins(num_bins,orientation_file,lightcurve,lightcurve_file):
     # Note: function returns 0 or 1 depending if an extra file is needed.
     extra = 0 
     if is_divisible == False:
-
+        
         #orientation
         this_file = "Orientation_Bins/bin_%s.ori" %str(num_bins)
         g = open(this_file,"w")
