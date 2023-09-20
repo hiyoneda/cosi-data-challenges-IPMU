@@ -33,7 +33,7 @@ run_nuc: True
 parallel_time_sims: True # True or False
 num_sims: 200 # Number of time bins to use:
 clear_sims: True # Remove existing simulation directories and write new ones. 
-run_type: "gnu_parallel" # "mult_nodes", "array_jobs", "gnu_parallel"
+run_type: "array_jobs" # "mult_nodes", "array_jobs", "array_jobs-parallel"
 
 # Option to use a lightcurve in your sim with parallel time bins:
 # Note: If True, LC and ori files must have same time binning. 
