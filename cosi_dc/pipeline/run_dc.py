@@ -213,6 +213,80 @@ class RunDataChallenge:
 
         return
 
+    def get_time_constant(self, ori_file):
+
+        """
+        Returns first time in ori file. 
+        """
+        
+        this_file = "Output/" + ori_file
+        f = open(this_file,"r")
+        lines = f.readlines()
+        split = lines[1].split()
+        constant = float(split[1])
+
+        return constant 
+
+    def modify_sim_times(self, filename, time_constant):
+
+        """
+        Modify time stamps in sim file by time constant. 
+        
+        Inputs:
+        filename: Name of cosima sim file to modify.
+
+        time_constant: Time in seconds used to modify time stamps. 
+        """
+
+        # Inputs:
+        this_file = "Output/" + filename
+        new_file = "Output/fixed_times_step3.inc1.id1.sim"
+
+        # Open new file for writing:
+        g = open(new_file,"w")
+
+        # Read through sim file and fix times:
+        if this_file.endswith(".gz"):
+            f = gzip.open(this_file,"rt")
+
+        if this_file.endswith(".sim"):
+            f = open(this_file,"r")
+
+        i = 0
+        j = 0
+        while True:
+
+            this_line = f.readline().strip()
+
+            i += 1
+
+            if len(this_line) == 0:
+                g.write(this_line+"\n")
+
+            if this_line:
+
+                if this_line.split()[0] != "TI":
+                    g.write(this_line+"\n")
+
+                if this_line.split()[0] == "TI":
+                    new_time = str(float(this_line.split()[1]) + time_constant)
+                    g.write("TI %s\n" %new_time)
+            
+                if this_line.split()[0] == "TS":
+                    break
+
+            if not this_line:
+                if i > 100:
+                    j += 1
+                    if j > 1:
+                        break
+
+        g.close()
+        f.close()
+        os.system("gzip %s -f" %new_file)
+
+        return
+
     def msimconcatter(self):
         
         """Concatenate output sim files from mcosima."""
@@ -247,6 +321,7 @@ class RunDataChallenge:
         print()
 
         cpu_list = []
+        problem_list = []
         for i in range(start,self.num_sims+1):
             print()
             print("checking sim " + str(i))
@@ -257,6 +332,7 @@ class RunDataChallenge:
             check = os.path.isfile(this_file)
             if check == False:
                 print("WARNING: cosima output does not exists: " + str(i))
+                problem_list.append(i)
                 continue
             
             # The output files are large, but we really only need the end, 
@@ -271,9 +347,11 @@ class RunDataChallenge:
             try: 
                 if "deleting..." not in lines[len(lines)-1]:
                     print("WARNING: something wrong with job: " + str(i))
+                    problem_list.append(i)
                     continue
             except: 
                 print("WARNING: no lines in file: " + str(i))
+                problem_list.append(i)
                 continue
 
             # Get cpu time:
@@ -294,6 +372,9 @@ class RunDataChallenge:
         f.close()
         os.system("rm temp.txt")
 
+        print("problem sims:")
+        print(problem_list)
+
         if get_cpu == True:
             cpu_list = np.array(cpu_list)
             mean = np.mean(cpu_list)
@@ -310,6 +391,54 @@ class RunDataChallenge:
             plt.savefig("cpu_time.pdf")
             if show_plot == True:
                 plt.show() 
+
+        return
+
+    def modify_isotope_sim_time(self, isotope_file, new_time):
+
+        """
+        Modifies the simulation time in the output isotope file from 
+        step 1 of the activation simulations. This is neccessary when 
+        using an orientation file, becuase the time does not start at zero.
+
+        Inputs:
+        isotope_file: name of isotope file from step 1. 
+      
+        new_time: exposure time in seconds used for the simulation, 
+        for the given time bin.
+        """
+        
+        # Update time for each time bin:
+        for i in range(0,self.num_sims): 
+            print("changing sim %s" %str(i))
+            temp_file = "Simulations/sim_%s/Output/temp.dat" %str(i)
+            this_file = "Simulations/sim_%s/Output/%s" %(str(i),isotope_file)
+
+            # Read file line by line and update TT:
+            g = open(temp_file,"w")
+            f = open(this_file,"r")
+            
+            lines = f.readlines()
+            for each in lines:
+                
+                split = each.split()
+                
+                if len(split) == 0:
+                    g.write(each)
+                
+                if len(split) > 0:
+                    
+                    if split[0] == "TT":
+                        new_line = split[0] + " " + str(new_time) + "\n"
+                        g.write(new_line)
+                    
+                    if split[0] != "TT":
+                        g.write(each)
+            g.close()
+            f.close()
+        
+            # Replace original file with updated one:
+            os.system("mv %s %s" %(temp_file,this_file))
 
         return
 
