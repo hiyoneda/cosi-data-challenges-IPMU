@@ -30,10 +30,16 @@ instance = RunDataChallenge("inputs.yaml")
 # Make sure to check the output at each stage after all jobs finish, 
 # to verify that everying is running ok. 
 # The parameter get_cpu in check cosima_parallel must be set to False for step 2. 
-step = "1"
-instance.name = "cosima_step%s" %step
-instance.run_cosima(output_name="cosima_step%s" %step)
-instance.check_cosima_parallel(input_file="cosima_step%s_terminal_output.txt" %step, get_cpu=True, show_plot=False)
+# Make sure to mofify the isotope sim time after step 1 if using an ori file!
+instance.name = "PrimaryProtons" # Name of component
+instance.run_cosima(output_name="cosima_step1")
+instance.check_cosima_parallel(input_file="cosima_step1_terminal_output.txt", get_cpu=True, show_plot=False)
+instance.modify_isotope_sim_time("PrimaryProtonsIsotopes.inc1.dat",45.0)
+
+# If you need to modify times in the sim file in order to match the decay component with the orientation times:
+# This is only needed for step 3. 
+constant = instance.get_time_constant("GalacticScan.ori")
+instance.modify_sim_times("PrimaryProtons_Decay.inc1.id1.sim.gz",constant)
 
 ### REVAN ###
 # run revan for both prompt and activation components:
