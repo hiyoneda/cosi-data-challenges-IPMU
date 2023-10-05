@@ -576,7 +576,7 @@ class RunDataChallenge:
             savefile="revan_events", start=0):
 
         """
-        Check that all cosima jobs converged, and get mean cpu time.
+        Check that all revan jobs converged, and get number of events.
         
         Optional input: 
         show_plot: whether or not to display the plot. Default is True. 
