@@ -21,5 +21,7 @@
 'Galdiff/GalTS_BestMatch',
 'DC2/proto_dc2/gruber99',
 'DC2/proto_dc2/gruber99_LEO',
-'other'
+'other',
+'DC2/backgrounds/PrimaryProtons',
+'DC2/backgrounds/PrimaryAlpha',
 ]

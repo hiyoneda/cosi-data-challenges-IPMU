@@ -71,13 +71,21 @@ class Setup:
             # Initiate source name:
             this_name = os.path.basename(each)
         
-            # Exit it not using source from source library:
+            # Exit if not using source from source library:
             if this_name == "other":
                 f = open("README.txt","w")
                 f.write("Using own source file.\n")
                 f.write("The source file still needs to be copied to this directory!\n")
                 f.write("Make sure that name in input file matches name of source file.")
                 f.close()
+                break
+           
+            # For activation backgrounds, copy all files to Source director:
+            if this_name in ["PrimaryProtons"]:
+                print("WARNING: Simulating activation background component:")
+                print("Make sure to set the correct paths in the soure files!")
+                this_src_dir = os.path.join(self.dc_dir,"Source_Library",each,"*")
+                os.system("scp %s ." %this_src_dir)
                 break
 
             # Get source from source library:

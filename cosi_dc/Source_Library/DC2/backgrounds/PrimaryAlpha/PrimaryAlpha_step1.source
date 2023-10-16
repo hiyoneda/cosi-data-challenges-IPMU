@@ -1,0 +1,20 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant 0.000002 
+StoreSimulationInfo  init-only 
+PhysicsListHD   qgsp-bic-hp
+PhysicsListEM   LivermorePol
+DecayMode	 ActivationBuildup
+Run SpaceSim
+SpaceSim.FileName		    PrimaryAlpha
+
+SpaceSim.Time  1835573700.0
+SpaceSim.IsotopeProductionFile     PrimaryAlphaIsotopes
+SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
+
+SpaceSim.Source PrimaryAlpha
+PrimaryAlpha.ParticleType	    21
+PrimaryAlpha.Beam FarFieldFileZenithDependent  CosmicAlphasSpenvis.beam.dat
+PrimaryAlpha.Spectrum File PrimaryAlphas_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+PrimaryAlpha.Flux		    0.01822488503618315
+
+PrimaryAlpha.LightCurve File false lightcurve.dat

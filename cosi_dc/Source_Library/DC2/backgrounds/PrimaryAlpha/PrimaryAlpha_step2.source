@@ -1,0 +1,9 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant               0.000002
+PhysicsListHD                      qgsp-bic-hp
+PhysicsListEM                      LivermorePol
+StoreSimulationInfo                all
+Activator A
+A.ActivationMode          ConstantIrradiation  31536000.0
+A.ActivationFile          PrimaryAlpha_Activation.dat
+A.IsotopeProductionFile   PrimaryAlphaIsotopes.p1.inc1.dat
