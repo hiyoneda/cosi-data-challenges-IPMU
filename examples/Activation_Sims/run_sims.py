@@ -3,7 +3,7 @@ from cosi_dc.pipeline.run_dc import RunDataChallenge
 
 ### INTRO ###
 # Run activation sims using run_type = array_jobs-parallel.
-# This allowed us to simulate 6 months of activation for DC2!
+# This allowed us to simulate 3 months of activation for DC2!
 
 ### SIMULATION SETUP ###
 # Define instance with input parameter card:
@@ -37,7 +37,7 @@ instance.check_cosima_parallel(input_file="cosima_step1_terminal_output.txt", ge
 instance.modify_isotope_sim_time("PrimaryProtonsIsotopes.inc1.dat",45.0)
 
 # If you need to modify times in the sim file in order to match the decay component with the orientation times:
-# This is only needed for step 3. 
+# This is only needed for step 3 if not using an ori file, but it's better to just use an ori file with step 3. 
 constant = instance.get_time_constant("GalacticScan.ori")
 instance.modify_sim_times("PrimaryProtons_Decay.inc1.id1.sim.gz",constant)
 
