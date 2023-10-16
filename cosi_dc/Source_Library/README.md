@@ -22,7 +22,7 @@ DC1/OrthoPs <br />
 DC2/proto_dc2/gruber99 <br />
 DC2/proto_dc2/gruber99_LEO <br />
 DC2/backgrounds/PrimaryProtons <br />
-DC2/backgrounds/PrimaryProtons <br />
+DC2/backgrounds/PrimaryAlpha <br />
 
 ## Galactic Diffuse (Galdiff) <br />
 Galdiff/GalIC <br />
