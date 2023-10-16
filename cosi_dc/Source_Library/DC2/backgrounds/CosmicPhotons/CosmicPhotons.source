@@ -1,0 +1,7 @@
+SpaceSim.Source CosmicPhotons
+CosmicPhotons.ParticleType	    1
+CosmicPhotons.Beam	FarFieldFileZenithDependent CosmicPhotonsGruber.beam.dat
+CosmicPhotons.Orientation 	    Galactic Fixed 90 180
+CosmicPhotons.Spectrum	File CosmicPhotons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+CosmicPhotons.Flux		   1.2294630098623485
+
