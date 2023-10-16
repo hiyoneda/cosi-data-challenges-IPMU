@@ -1,0 +1,19 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant 0.000002 
+StoreSimulationInfo  init-only 
+PhysicsListHD   qgsp-bic-hp
+PhysicsListEM   LivermorePol
+DecayMode	 ActivationBuildup
+Run SpaceSim
+SpaceSim.FileName		    PrimaryProtons
+
+SpaceSim.Time  1835573700.0
+SpaceSim.IsotopeProductionFile     PrimaryProtonsIsotopes
+SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
+
+SpaceSim.Source PrimaryProtons
+PrimaryProtons.ParticleType	     4
+PrimaryProtons.Beam FarFieldFileZenithDependent CosmicProtonsSpenvis.beam.dat
+PrimaryProtons.Spectrum 	File PrimaryProtons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+PrimaryProtons.Flux		     0.13149394971350514
+PrimaryProtons.LightCurve File false	lightcurve.dat

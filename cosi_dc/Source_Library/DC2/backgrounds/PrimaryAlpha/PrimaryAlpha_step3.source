@@ -1,0 +1,11 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant               0.000002
+StoreSimulationInfo  init-only
+PhysicsListHD                      qgsp-bic-hp
+PhysicsListEM                      LivermorePol
+DecayMode                          ActivationDelayedDecay
+Run ActivationStep3
+ActivationStep3.OrientationSky Galactic File NoLoop GalacticScan.ori
+ActivationStep3.FileName                         PrimaryAlpha_Decay
+ActivationStep3.Time                             1835573700.0
+ActivationStep3.ActivationSources                PrimaryAlpha_Activation.dat

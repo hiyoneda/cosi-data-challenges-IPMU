@@ -1,0 +1,9 @@
+Geometry /zfs/astrohe/ckarwin/My_Class_Library/COSI/Data_Challenge/Input_Files/Geometry_Files/DC2/massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant               0.000002
+PhysicsListHD                      qgsp-bic-hp
+PhysicsListEM                      LivermorePol
+StoreSimulationInfo                all
+Activator A
+A.ActivationMode          ConstantIrradiation  31536000.0
+A.ActivationFile          PrimaryProtons_Activation.dat
+A.IsotopeProductionFile   PrimaryProtonsIsotopes.inc1.dat
