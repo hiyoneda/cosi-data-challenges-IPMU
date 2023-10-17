@@ -1,4 +1,4 @@
-SpaceSim.Source CosmicPhotons
+DataChallenge.Source CosmicPhotons
 CosmicPhotons.ParticleType	    1
 CosmicPhotons.Beam	FarFieldFileZenithDependent CosmicPhotonsGruber.beam.dat
 CosmicPhotons.Orientation 	    Galactic Fixed 90 180
