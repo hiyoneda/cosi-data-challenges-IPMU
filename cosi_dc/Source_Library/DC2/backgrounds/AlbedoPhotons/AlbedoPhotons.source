@@ -1,0 +1,7 @@
+DataChallenge.Source AlbedoPhotons
+AlbedoPhotons.ParticleType	       1
+AlbedoPhotons.Beam FarFieldFileZenithDependent AlbedoPhotonsTuerlerMizunoAbdo.beam.dat
+AlbedoPhotons.Spectrum  File AlbedoPhotons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+AlbedoPhotons.Flux	  1.107787525345712
+
+AlbedoPhotons.LightCurve File false lightcurve.dat
