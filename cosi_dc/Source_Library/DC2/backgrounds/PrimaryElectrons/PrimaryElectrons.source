@@ -1,0 +1,18 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant 0.000002 
+StoreSimulationInfo  init-only 
+PhysicsListHD   qgsp-bic-hp
+PhysicsListEM   LivermorePol
+
+Run SpaceSim
+SpaceSim.FileName  PrimaryElectron
+SpaceSim.Time  1851447240.0
+SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
+
+SpaceSim.Source PrimaryElectron
+PrimaryElectron.ParticleType  3
+PrimaryElectron.Beam   FarFieldFileZenithDependent CosmicElectronsMizuno.beam.dat
+PrimaryElectron.Spectrum File PrimaryElectrons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+PrimaryElectron.Flux		      0.0009367228737313208
+
+PrimaryElectron.LightCurve File false lightcurve.dat

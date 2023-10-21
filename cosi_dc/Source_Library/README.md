@@ -24,6 +24,9 @@ DC2/proto_dc2/gruber99_LEO <br />
 DC2/backgrounds/PrimaryProtons <br />
 DC2/backgrounds/PrimaryAlpha <br />
 DC2/backgrounds/CosmicPhotons <br />
+DC2/backgrounds/AtmosphericNeutrons <br />
+DC2/backgrounds/PrimaryElectrons <br />
+DC2/backgrounds/AlbedoPhotons <br />
 
 ## Galactic Diffuse (Galdiff) <br />
 Galdiff/GalIC <br />

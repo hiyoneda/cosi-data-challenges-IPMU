@@ -1,0 +1,20 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant 0.000002 
+StoreSimulationInfo  init-only 
+PhysicsListHD   qgsp-bic-hp
+PhysicsListEM   LivermorePol
+DecayMode	 ActivationBuildup
+Run SpaceSim
+SpaceSim.FileName		    NeutronAtm
+
+SpaceSim.Time  1851447240.0
+SpaceSim.IsotopeProductionFile     NeutronAtmIsotopes
+SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
+
+SpaceSim.Source NeutronAtm
+NeutronAtm.ParticleType   6
+NeutronAtm.Beam FarFieldFileZenithDependent AlbedoNeutronsKole.beam.dat
+NeutronAtm.Spectrum File AtmosphericNeutrons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+NeutronAtm.Flux   0.03861729506290615
+
+NeutronAtm.LightCurve File false lightcurve.dat

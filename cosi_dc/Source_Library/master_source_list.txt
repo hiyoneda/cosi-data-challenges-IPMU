@@ -24,5 +24,8 @@
 'other',
 'DC2/backgrounds/PrimaryProtons',
 'DC2/backgrounds/PrimaryAlpha',
-'DC2/backgrounds/CosmicPhotons'
+'DC2/backgrounds/CosmicPhotons',
+'DC2/backgrounds/AtmosphericNeutrons',
+'DC2/backgrounds/PrimaryElectrons',
+'DC2/backgrounds/AlbedoPhotons'
 ]
