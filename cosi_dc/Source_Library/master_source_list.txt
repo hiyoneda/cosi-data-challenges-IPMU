@@ -27,5 +27,6 @@
 'DC2/backgrounds/CosmicPhotons',
 'DC2/backgrounds/AtmosphericNeutrons',
 'DC2/backgrounds/PrimaryElectrons',
-'DC2/backgrounds/AlbedoPhotons'
+'DC2/backgrounds/AlbedoPhotons',
+'DC2/backgrounds/PrimaryPositrons'
 ]

@@ -27,6 +27,7 @@ DC2/backgrounds/CosmicPhotons <br />
 DC2/backgrounds/AtmosphericNeutrons <br />
 DC2/backgrounds/PrimaryElectrons <br />
 DC2/backgrounds/AlbedoPhotons <br />
+DC2/backgrounds/PrimaryPositrons <br />
 
 ## Galactic Diffuse (Galdiff) <br />
 Galdiff/GalIC <br />
