@@ -1,0 +1,18 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant 0.000002 
+StoreSimulationInfo  init-only 
+PhysicsListHD   qgsp-bic-hp
+PhysicsListEM   LivermorePol
+
+Run SpaceSim
+SpaceSim.FileName  PrimaryPositron
+SpaceSim.Time  1851447240.0
+SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
+
+SpaceSim.Source PrimaryPositrons
+PrimaryPositrons.ParticleType  2
+PrimaryPositrons.Beam   FarFieldFileZenithDependent CosmicPositronsMizuno.beam.dat
+PrimaryPositrons.Spectrum File PrimaryPositrons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+PrimaryPositrons.Flux		      5.9344033371577237e-05
+
+PrimaryPositron.LightCurve File false lightcurve.dat
