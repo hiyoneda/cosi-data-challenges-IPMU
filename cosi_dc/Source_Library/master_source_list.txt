@@ -23,10 +23,11 @@
 'DC2/proto_dc2/gruber99_LEO',
 'other',
 'DC2/backgrounds/PrimaryProtons',
-'DC2/backgrounds/PrimaryAlpha',
+'DC2/backgrounds/PrimaryAlphas',
 'DC2/backgrounds/CosmicPhotons',
 'DC2/backgrounds/AtmosphericNeutrons',
 'DC2/backgrounds/PrimaryElectrons',
 'DC2/backgrounds/AlbedoPhotons',
-'DC2/backgrounds/PrimaryPositrons'
+'DC2/backgrounds/PrimaryPositrons',
+'DC2/backgrounds/SecondaryProtons',
 ]
