@@ -5,5 +5,5 @@ PhysicsListEM                      LivermorePol
 StoreSimulationInfo                all
 Activator A
 A.ActivationMode          ConstantIrradiation  31536000
-A.ActivationFile          NeutronAtm_Activation.dat
-A.IsotopeProductionFile   NeutronAtmIsotopes.dat
+A.ActivationFile          SecondaryProtons_Activation.dat
+A.IsotopeProductionFile   SecondaryProtonsIsotopes.dat

@@ -7,7 +7,7 @@ DecayMode	 ActivationBuildup
 Run SpaceSim
 SpaceSim.FileName		    PrimaryAlpha
 
-SpaceSim.Time  1835573700.0
+SpaceSim.Time  1851447240.0
 SpaceSim.IsotopeProductionFile     PrimaryAlphaIsotopes
 SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
 

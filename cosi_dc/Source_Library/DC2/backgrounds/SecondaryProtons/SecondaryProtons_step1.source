@@ -1,0 +1,20 @@
+Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
+DetectorTimeConstant 0.000002 
+StoreSimulationInfo  init-only 
+PhysicsListHD   qgsp-bic-hp
+PhysicsListEM   LivermorePol
+DecayMode	 ActivationBuildup
+Run SpaceSim
+SpaceSim.FileName		    SecondaryProtons
+
+SpaceSim.Time  1851447240.0
+SpaceSim.IsotopeProductionFile     SecondaryProtonsIsotopes
+SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
+
+SpaceSim.Source SecondaryProtons
+SecondaryProtons.ParticleType           4
+SecondaryProtons.Beam  FarFieldFileZenithDependent AlbedoProtonMizuno.beam.dat
+SecondaryProtons.Spectrum File SecondaryProtonsUpward_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat
+SecondaryProtons.Flux                 0.04691358059995734
+
+SecondaryProtons.LightCurve File false lightcurve.dat

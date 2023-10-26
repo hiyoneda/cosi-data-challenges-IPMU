@@ -81,8 +81,9 @@ class Setup:
                 break
            
             # For activation backgrounds, copy all files to Source director:
-            if this_name in ["PrimaryProtons","PrimaryAlpha",
-                    "AtmosphericNeutrons","PrimaryElectrons","PrimaryPositrons"]:
+            if this_name in ["PrimaryProtons","PrimaryAlphas",
+                    "AtmosphericNeutrons","PrimaryElectrons","PrimaryPositrons",
+                    "SecondaryProtons"]:
                 print("WARNING: Simulating instrumental background component:")
                 print("Make sure to set the correct paths in the source files!")
                 this_src_dir = os.path.join(self.dc_dir,"Source_Library",each,"*")
