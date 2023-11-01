@@ -1,13 +1,4 @@
-Geometry massmodel-cosi-smex-v12/COSISMEX.geo.setup 
-DetectorTimeConstant 0.000002 
-StoreSimulationInfo  init-only 
-PhysicsListEM LivermorePol
-Run SpaceSim
-SpaceSim.FileName  AlbedoPhotons
-SpaceSim.Time  1851447240.0
-SpaceSim.OrientationSky Galactic File NoLoop GalacticScan.ori
-
-SpaceSim.Source AlbedoPhotons
+DataChallenge.Source AlbedoPhotons
 AlbedoPhotons.ParticleType	       1
 AlbedoPhotons.Beam FarFieldFileZenithDependent AlbedoPhotonsTuerlerMizunoAbdo.beam.dat
 AlbedoPhotons.Spectrum  File AlbedoPhotons_Spec_550.0km_0.0deg_10.000cutoff_650.0solarmod.dat

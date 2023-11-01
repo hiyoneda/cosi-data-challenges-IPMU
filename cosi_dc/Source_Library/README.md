@@ -29,6 +29,10 @@ DC2/backgrounds/PrimaryElectrons <br />
 DC2/backgrounds/AlbedoPhotons <br />
 DC2/backgrounds/PrimaryPositrons <br />
 DC2/backgrounds/SecondaryProtons <br />
+DC2/sources/511_ThickDisk <br />
+DC2/sources/511_ThinDisk <br />
+DC2/sources/511_ThickDiskx10 <br />
+DC2/sources/511_ThinDiskx10 <br />
 
 ## Galactic Diffuse (Galdiff) <br />
 Galdiff/GalIC <br />

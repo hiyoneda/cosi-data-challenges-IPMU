@@ -81,6 +81,7 @@ class Setup:
                 break
            
             # For activation backgrounds, copy all files to Source director:
+            # Note: cosmic photons and albedo are setup like other source files. 
             if this_name in ["PrimaryProtons","PrimaryAlphas",
                     "AtmosphericNeutrons","PrimaryElectrons","PrimaryPositrons",
                     "SecondaryProtons"]:

@@ -30,4 +30,8 @@
 'DC2/backgrounds/AlbedoPhotons',
 'DC2/backgrounds/PrimaryPositrons',
 'DC2/backgrounds/SecondaryProtons',
+'DC2/sources/511_ThickDisk',
+'DC2/sources/511_ThinDisk',
+'DC2/sources/511_ThickDiskx10',
+'DC2/sources/511_ThinDiskx10',
 ]
