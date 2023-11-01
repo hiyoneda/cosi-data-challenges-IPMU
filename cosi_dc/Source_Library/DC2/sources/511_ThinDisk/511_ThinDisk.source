@@ -1,0 +1,58 @@
+# The follwoing values are from Skinner+14 (Table 1).
+# Assuming OPs fraction for bulge is 95% and disk is 85%
+
+DataChallenge.Source CentralPointSource511
+CentralPointSource511.ParticleType       1
+CentralPointSource511.Beam               FarFieldPointSource 0 0
+CentralPointSource511.Orientation	 Galactic Fixed 0 0
+CentralPointSource511.Spectrum           Gaussian 511 0.85 3
+CentralPointSource511.Flux               0.00012
+
+DataChallenge.Source CentralPointSourceOPs
+CentralPointSourceOPs.ParticleType       1
+CentralPointSourceOPs.Beam               FarFieldPointSource 0 0
+CentralPointSourceOPs.Orientation	 Galactic Fixed 0 0
+CentralPointSourceOPs.Spectrum           File OPsSpectrum.dat
+CentralPointSourceOPs.Flux               0.00046
+
+DataChallenge.Source NarrowGaussian511
+NarrowGaussian511.ParticleType           1
+NarrowGaussian511.Beam                   FarFieldGaussian 0 0 2.5
+NarrowGaussian511.Orientation            Galactic Fixed -1.25 -0.25
+NarrowGaussian511.Spectrum               Gaussian 511 0.85 3
+NarrowGaussian511.Flux                   0.00028
+
+DataChallenge.Source NarrowGaussianOPs
+NarrowGaussianOPs.ParticleType           1
+NarrowGaussianOPs.Beam                   FarFieldGaussian 0 0 2.5
+NarrowGaussianOPs.Orientation            Galactic Fixed -1.25 -0.25
+NarrowGaussianOPs.Spectrum               File OPsSpectrum.dat
+NarrowGaussianOPs.Flux                   0.0011
+
+DataChallenge.Source BroadGaussian511
+BroadGaussian511.ParticleType            1
+BroadGaussian511.Beam                    FarFieldGaussian 0 0 8.7
+BroadGaussian511.Orientation             Galactic Fixed 0 0
+BroadGaussian511.Spectrum                Gaussian 511 0.85 3
+BroadGaussian511.Flux                    0.00073
+
+DataChallenge.Source BroadGaussianOPs
+BroadGaussianOPs.ParticleType            1
+BroadGaussianOPs.Beam                    FarFieldGaussian 0 0 8.7
+BroadGaussianOPs.Orientation             Galactic Fixed 0 0
+BroadGaussianOPs.Spectrum                File OPsSpectrum.dat
+BroadGaussianOPs.Flux                    0.0027
+
+DataChallenge.Source Disk511
+Disk511.ParticleType           1
+Disk511.Beam                   FarFieldAssymetricGaussian 0 0 90 3 0
+Disk511.Orientation            Galactic Fixed 0 0
+Disk511.Spectrum               Gaussian 511 1.27 3
+Disk511.Flux                   1.7e-3
+
+DataChallenge.Source DiskOPs
+DiskOPs.ParticleType           1
+DiskOPs.Beam                   FarFieldAssymetricGaussian 0 0 90 3 0
+DiskOPs.Orientation            Galactic Fixed 0 0
+DiskOPs.Spectrum               File OPsSpectrum.dat
+DiskOPs.Flux                   4.5e-3
