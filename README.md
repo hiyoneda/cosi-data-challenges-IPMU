@@ -36,16 +36,19 @@ See Source_Library for available sources. Let us know if you want any specific s
 6. To run the code:  </b>
   - Uncomment the functions inside run_sims.py that you want to run.
   - The code can be ran directly from the terminal or submitted to a batch system.
+  - The code supports both PBS and Slurm.
   - To run from the terminal use python run_sims.py.
   - To run parallel jobs in cosima with numerous time bins use python run_parallel_sims.py. 
-  - To submit a single job use python submit_jobs.py. 
+  - To submit a single job use 'python submit_jobs.py' for PBS and 'sbatch slurm_single.sh' for Slurm. 
 
 7. If running parallel jobs:
   - In run_sims.py uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
-  - After all the jobs finish, uncomment just the mimrec function in run_sims.py, then run: python submit_jobs.py.
+  - This will setup all the scripts needed for running parallel jobs, depending on the run type specified in the inputs yaml file. 
 
-8. Note that the batch submission commands in run_parallel_sims.py and submit_jobs.py may need to be modified based on the user's specific batch system.
+8. Note that the batch submission commands may need to be modified based on the user's specific batch system.
+  - The batch system is specified via the run_type parameter. 
+  - The example directory contains different batch scripts. 
 
 </pre>
 
