@@ -84,7 +84,37 @@ for i in range(0,num_sims+extra):
     # Return home:
     os.chdir(home)
 
+def write_parallel(args):
+
+    """
+    Writes intermediate parallel submission script.
+    
+    args: number of passed arguements. Must be 1 or 2. 
+    """
+
+    f = open('parallel.py','w')
+    f.write('# Imports:\n')
+    f.write('import sys\n')
+    f.write('import os\n\n')
+    f.write('# Run directory:\n')
+    if args not in [1,2]:
+        print("ERROR: args must be 1 or 2.")
+        sys.exit()
+    if args == 1:
+        f.write('this_run = int(sys.argv[1])\n')
+    if args == 2:
+        f.write('this_run = int(sys.argv[1]) + int(sys.argv[2])\n')
+    f.write('this_dir = "Simulations/sim_%s" %this_run\n')
+    f.write('os.system("scp run_sims.py inputs.yaml %s" %this_dir\n')
+    f.write('os.chdir(this_dir)\n')
+    f.write('os.system("python run_sims.py")')
+    f.close()
+    
+    return
+
 if run_type == "array_jobs-parallel":
+    
+    # Main submission script:
     f = open('array_job.sh','w')
     f.write('#PBS -N array\n')
     f.write('#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=25:00:00\n')
@@ -99,6 +129,9 @@ if run_type == "array_jobs-parallel":
     f.write("module add gnu-parallel\n")
     f.write("parallel --delay=3 -j7 python parallel.py $PBS_ARRAY_INDEX ::: {0..6}")
     f.close()
+
+    # Make parallel file:
+    write_parallel(2)
 
 if run_type == "array_jobs":
     f = open('array_job.sh','w')
@@ -116,6 +149,34 @@ if run_type == "array_jobs":
     f.write('cd Simulations/sim_$PBS_ARRAY_INDEX\n')
     f.write('python run_sims.py')
     f.close()
+
+if run_type == "slurm":
+    
+    # Main submission script
+    f = open('slurm_mult.sh','w')
+    f.write('#!/bin/bash\n')
+    f.write('#SBATCH --time=0:55:00\n')
+    f.write('#SBATCH -o output.%j\n')
+    f.write('#SBATCH -e error.%j\n')
+    f.write('#SBATCH --qos=debug\n')
+    f.write('#SBATCH --account=j1042\n')
+    f.write('#SBATCH --job-name=511_thick10x\n')
+    f.write('#SBATCH --ntasks=1000\n')
+    f.write('#SBATCH --mem-per-cpu=3G\n\n')
+    f.write('#The MEGAlib environment first needs to be sourced:\n')
+    f.write('cd /discover/nobackup/ckarwin/Software\n')
+    f.write('source COSI.sh\n\n')
+    f.write('cd $SLURM_SUBMIT_DIR\n\n')
+    f.write('for i in {0..1001}\n')
+    f.write('do\n')
+    f.write('   sleep 1\n')
+    f.write('   srun -n1 --exclusive python parallel.py $i &\n')
+    f.write('done\n')
+    f.write('wait')
+    f.close()
+
+    # Make parallel file:
+    write_parallel(1)
 
 # Make main output directory:
 os.system("mkdir Output")

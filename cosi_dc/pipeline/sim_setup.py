@@ -23,6 +23,7 @@ class Setup:
         self.src_list = inputs["src_list"]
         self.include_transmission_prob = inputs["include_transmission_prob"]
         self.transmission_prob_file = inputs["transmission_prob_file"]
+        self.run_type = inputs["run_type"]
 
     def setup_srcs(self):
     
