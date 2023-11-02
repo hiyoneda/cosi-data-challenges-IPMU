@@ -42,11 +42,10 @@ See Source_Library for available sources. Let us know if you want any specific s
   - To submit a single job use 'python submit_jobs.py' for PBS and 'sbatch slurm_single.sh' for Slurm. 
 
 7. If running parallel jobs:
-  - In run_sims.py uncomment all functions except mimrec.
   - Run: python run_parallel_sims.py.  
-  - This will setup all the scripts needed for running parallel jobs, depending on the run type specified in the inputs yaml file. 
+  - This will setup all the sim directories and the scripts needed for running parallel jobs, depending on the run type specified in inputs.yaml. 
 
-8. Note that the batch submission commands may need to be modified based on the user's specific batch system.
+8. Note that the batch submission commands may need to be modified based on the user's specific batch system and needs.
   - The batch system is specified via the run_type parameter. 
   - The example directory contains different batch scripts. 
 
