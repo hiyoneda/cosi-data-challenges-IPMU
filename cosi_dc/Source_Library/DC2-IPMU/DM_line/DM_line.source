@@ -1,0 +1,6 @@
+DataChallenge.Source DM_line
+
+DM_line.ParticleType 1
+DM_line.Beam FarFieldNormalizedEnergyBeamFluxFunction ISO_line.dat
+DM_line.Spectrum NormalizedEnergyBeamFluxFunction
+DM_line.Orientation Galactic Fixed 90 180
