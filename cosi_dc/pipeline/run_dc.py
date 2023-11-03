@@ -302,7 +302,7 @@ class RunDataChallenge:
         return
 
     def check_cosima_parallel(self, show_plot=True, 
-            input_file="cosima_terminal_output.txt", get_cpu=True, start=0):
+            input_file="cosima_terminal_output.txt", get_cpu=True, start=0, stop=None):
 
         """
         Check that all cosima jobs converged, and get mean cpu time.
@@ -313,7 +313,9 @@ class RunDataChallenge:
         get_cpu: Whether or not to get cpu time. 
             - default is True.
         start: staring integer for iterating through sim files. 
-            - default is 0. 
+            - default is 0.
+        stop: ending integer for iterating through sim files.
+            - default is total number of sim files.
         """
 
         print()
@@ -322,7 +324,9 @@ class RunDataChallenge:
 
         cpu_list = []
         problem_list = []
-        for i in range(start,self.num_sims+1):
+        if stop == None:
+            stop = self.num_sims+1
+        for i in range(start,stop):
             print()
             print("checking sim " + str(i))
             print()
