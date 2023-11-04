@@ -7,6 +7,14 @@ from cosi_dc.pipeline.make_orientation_bins import make_bins
 import yaml
 from cosi_dc.pipeline.run_dc import RunDataChallenge
 
+# Please change them if needed.
+node = 1 # num. of nodes for each job request. Be careful that it is not the same as the number of total nodes in your simulation. Basically, you don't have to change this.
+ncpus = 1 # num. of cps on a node
+mem = 16 # size of memory on a node
+mailoption = "a"
+walltime = "24:00:00"
+qtype = "tiny"
+
 # Get parameters from data challene instance:
 instance = RunDataChallenge("inputs.yaml")
 name = instance.name
@@ -18,6 +26,9 @@ run_type = instance.run_type
 clear = instance.clear_sims 
 mcosima = instance.mcosima
 num_cores = instance.num_cores
+
+# Parameters for array jobs parallel
+num_run_in_node = 8
 
 # Make orientation time bins:
 # Note: the function returns 0 or 1 depending if an extra file is needed (see for loop below).
@@ -44,7 +55,7 @@ for i in range(0,num_sims+extra):
         # Make new sim_i directory:
         os.system("mkdir %s" %this_dir)
     
-    os.system("scp run_sims.py inputs.yaml %s" %this_dir)
+    os.system("scp run_script_single_thread.sh run_sims_cosima.py run_sims_revan.py inputs.yaml %s" %this_dir)
     os.chdir(this_dir)
     new_dir = os.getcwd()
     
@@ -65,14 +76,16 @@ for i in range(0,num_sims+extra):
     
         # Write batch submission file:
         f = open('multiple_batch_submission.pbs','w')
-        f.write("#PBS -N sim_%s\n" %str(i))
-        f.write("#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=48:00:00\n\n")
-        f.write("#the MEGAlib environment first needs to be sourced:\n")
-        f.write("cd /zfs/astrohe/Software\n")
-        f.write("source COSIMain_u2.sh\n\n")
-        f.write("#change to working directory and run job\n")
-        f.write("cd %s\n" %new_dir)
-        f.write("python run_sims.py")
+
+        f.write( "#!/bin/bash\n")
+        f.write(f"#PBS -N sim_{i}\n")
+        f.write(f"#PBS -l select={node}:ncpus={ncpus}:mem={mem}gb\n")
+        f.write(f"#PBS -l walltime={walltime}\n")
+        f.write(f"#PBS -m {mailoption}\n")
+        f.write(f"#PBS -q {qtype}\n")
+        f.write( "\n")
+        f.write(f"cd {new_dir}\n")
+        f.write(f"sh run_script_single_thread.sh `pwd`\n")
         f.close()
     
         # Submit job:
@@ -85,7 +98,33 @@ for i in range(0,num_sims+extra):
     os.chdir(home)
 
 if run_type == "array_jobs-parallel":
-    f = open('array_job.sh','w')
+    num_node = (num_sims + extra) // num_run_in_node + 1
+
+    print(f"will use {num_node} nodes")
+    print(f"in each node, {num_run_in_node} simulations will be performed in parallel.")
+
+    f = open('array_job-parallel.pbs','w')
+
+    f.write( "#!/bin/bash\n")
+    f.write( "#PBS -N array-parallel\n")
+    f.write(f"#PBS -l select={node}:ncpus={ncpus}:mem={mem}gb\n")
+    f.write(f"#PBS -l walltime={walltime}\n")
+    f.write(f"#PBS -m {mailoption}\n")
+    f.write(f"#PBS -q {qtype}\n")
+    f.write(f'#PBS -J 0-{num_node-1}\n')
+    f.write( "\n")
+    f.write( '# Need to delay job start times by random number to prevent overloading system:\n')
+    f.write( 'sleep `expr $RANDOM % 60`\n')
+    f.write( "\n")
+    f.write( 'cd $PBS_O_WORKDIR\n')
+    f.write( "for i in {0..%d}\n" % (num_run_in_node-1))
+    f.write( "do\n")
+    f.write(f'echo "sleep $i;sh run_script_single_thread.sh $PBS_O_WORKDIR/Simulations/sim_`expr $PBS_ARRAY_INDEX \* {num_run_in_node} + $i`"\n')
+    f.write(f'done | xargs -P{num_run_in_node} -I@ sh -c "@"\n')
+
+    f.close()
+
+'''
     f.write('#PBS -N array\n')
     f.write('#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=25:00:00\n')
     f.write('#PBS -J 0-%s:7\n\n' %str(num_sims))
@@ -99,22 +138,27 @@ if run_type == "array_jobs-parallel":
     f.write("module add gnu-parallel\n")
     f.write("parallel --delay=3 -j7 python parallel.py $PBS_ARRAY_INDEX ::: {0..6}")
     f.close()
+'''
 
 if run_type == "array_jobs":
-    f = open('array_job.sh','w')
-    f.write('#PBS -N array\n')
-    f.write('#PBS -l select=1:ncpus=1:mem=15gb:interconnect=1g,walltime=25:00:00\n')
-    f.write('#PBS -J 0-%s\n\n' %str(num_sims))
-    f.write('#Need to delay job start times by random number to prevent overloading system:\n')
-    f.write('sleep `expr $RANDOM % 60`\n\n')
-    f.write('#The MEGAlib environment first needs to be sourced:\n')
-    f.write('cd $tmp/zfs/astrohe/Software\n')
-    f.write('source COSIMain_u2.sh\n\n')
-    f.write('#Change to home directory and run job\n')
+
+    f = open('array_job.pbs','w')
+
+    f.write("#!/bin/bash\n")
+    f.write("#PBS -N array\n")
+    f.write(f"#PBS -l select={node}:ncpus={ncpus}:mem={mem}gb\n")
+    f.write(f"#PBS -l walltime={walltime}\n")
+    f.write(f"#PBS -m {mailoption}\n")
+    f.write(f"#PBS -q {qtype}\n")
+    f.write('#PBS -J 0-%s\n' %str(num_sims+extra-1))
+    f.write("\n")
+    f.write('# Need to delay job start times by random number to prevent overloading system:\n')
+    f.write('sleep `expr $RANDOM % 60`\n')
+    f.write("\n")
     f.write('cd $PBS_O_WORKDIR\n')
-    f.write('scp run_sims.py inputs.yaml Simulations/sim_$PBS_ARRAY_INDEX\n')
-    f.write('cd Simulations/sim_$PBS_ARRAY_INDEX\n')
-    f.write('python run_sims.py')
+    f.write("\n")
+    f.write(f"sh run_script_single_thread.sh $PBS_O_WORKDIR/Simulations/sim_$PBS_ARRAY_INDEX\n")
+
     f.close()
 
 # Make main output directory:

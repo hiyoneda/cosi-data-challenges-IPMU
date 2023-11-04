@@ -2,43 +2,29 @@
 import os, sys
 import time
 
+# Please change them if needed.
+node = 1 # num. of nodes for each job request. Be careful that it is not the same as the number of total nodes in your simulation. Basically, you don't have to change this.
+ncpus = 2 # num. of cps on a node
+mem = 50 # size of memory on a node
+mailoption = "a"
+walltime = "01:00:00"
+qtype = "mini"
+
 # Get current working directory:
 this_dir = os.getcwd()
 
-# do not change these lines.
-megalib_main_path = "/lustre/work/COSI/software/megalib"
-megalib_dee2022_path = "/lustre/work/COSI/software/megalib_dee2022"
-python_cosi_path = "/lustre/work/COSI/software/python_cosi"
-
 # Write submission file and submit:
-f = open('batch_submission.pbs','w')
 
-f.write("#!/bin/bash\n")
-f.write("#PBS -N COSIsim_single\n")
-f.write("#PBS -l select=1:ncpus=2:mem=50gb\n")
-f.write("#PBS -l walltime=01:00:00\n")
-f.write("#PBS -m ae\n")
-f.write("#PBS -q mini\n")
-f.write("\n")
-f.write("# Source global definitions\n")
-f.write("if [ -f /etc/bashrc ]; then\n")
-f.write("	. /etc/bashrc\n")
-f.write("fi\n")
-f.write("\n")
-f.write("#change to working directory and run job\n")
-f.write("cd %s\n" %this_dir)
-f.write("\n")
-f.write("#conda activation\n")
-f.write(f"conda activate {python_cosi_path}\n")
-f.write("\n")
-f.write("#the main MEGAlib environment is sourced\n")
-f.write(f"source {megalib_main_path}/bin/source-megalib.sh\n")
-f.write("python run_sims_cosima.py\n")
-f.write("\n")
-f.write("#the dee2022 MEGAlib environment is sourced\n")
-f.write(f"source {megalib_dee2022_path}/bin/source-megalib.sh\n")
-f.write("python run_sims_revan.py\n")
-f.close()
+with open('batch_submission.pbs','w') as f:
+    f.write( "#!/bin/bash\n")
+    f.write( "#PBS -N COSIsim_single\n")
+    f.write(f"#PBS -l select={node}:ncpus={ncpus}:mem={mem}gb\n")
+    f.write(f"#PBS -l walltime={walltime}\n")
+    f.write(f"#PBS -m {mailoption}\n")
+    f.write(f"#PBS -q {qtype}\n")
+    f.write( "\n")
+    f.write( "cd $PBS_O_WORKDIR\n")
+    f.write( "sh run_script_single_thread.sh `pwd`\n")
 
 os.system("qsub batch_submission.pbs")
 time.sleep(3)

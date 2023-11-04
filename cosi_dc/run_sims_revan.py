@@ -16,6 +16,6 @@ instance.geo_file = '/lustre/work/COSI/software/cosi-data-challenges-IPMU/cosi_d
 #instance.run_nuclearizer() # it will not be used in DC2.
 
 instance.run_revan()
-instance.check_revan_parallel() # please comment out if the simulation is performed with a single core. 
+#instance.check_revan_parallel() # please comment out if the simulation is performed with a single core. 
 instance.run_mimrec(extract_root=True)
-instance.clear_unessential_data() # please comment out if the simulation is performed with a single core. 
+#instance.clear_unessential_data() # please comment out if the simulation is performed with a single core. 

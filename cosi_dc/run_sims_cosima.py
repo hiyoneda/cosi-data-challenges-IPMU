@@ -8,7 +8,7 @@ instance = RunDataChallenge("inputs.yaml")
 
 instance.define_sim()
 instance.run_cosima()
-instance.check_cosima_parallel() # please comment out if the simulation is performed with a single core. 
+#instance.check_cosima_parallel()
 
 #instance.run_nuclearizer() # it will not be used in DC2.
 
