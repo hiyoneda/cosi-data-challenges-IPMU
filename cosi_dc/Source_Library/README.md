@@ -33,6 +33,8 @@ DC2/sources/511_ThickDisk <br />
 DC2/sources/511_ThinDisk <br />
 DC2/sources/511_ThickDiskx10 <br />
 DC2/sources/511_ThinDiskx10 <br />
+DC2/sources/Al26_R5000_z0200_M30 <br />
+DC2/sources/Al26_R5000_z1000_M60 <br />
 
 ## Galactic Diffuse (Galdiff) <br />
 Galdiff/GalIC <br />

@@ -1,1 +1,1 @@
-These files are too large for github. 
+Mass models are available in COSITools. 

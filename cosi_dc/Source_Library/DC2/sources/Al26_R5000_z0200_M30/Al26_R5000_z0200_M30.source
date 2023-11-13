@@ -1,0 +1,7 @@
+DataChallenge.Source Al26_R5000_z0200_M30
+
+Al26_R5000_z0200_M30.ParticleType 1
+Al26_R5000_z0200_M30.Beam FarFieldNormalizedEnergyBeamFluxFunction COSI_DC2_26Al_R5000_z0200_M30_3deg.dat
+Al26_R5000_z0200_M30.Spectrum NormalizedEnergyBeamFluxFunction
+Al26_R5000_z0200_M30.Orientation Galactic Fixed 90 180
+Al26_R5000_z0200_M30.FarFieldTransmissionProbability TP_Earth_occultation_550km_zenith_pointing.dat
