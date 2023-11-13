@@ -1,8 +1,8 @@
-We used a total exposure time of 3 months.
+We used a total exposure time of 3 months, i.e this is the time that was used in step 1 of the simulations.
 For the irradiation time in step 2 of the simulations we used 1 year.
-Thus, our background estimates correspond to 3 months of exposure at a rate for an irradiation time of 1 year.
+Thus, our background estimates correspond to 3 months of exposure, and then scaled to a rate for an irradiation time of 1 year.
 
-The activation simulations include the time variation from the changing geomagnetic cutoff within the orbit. To accomplish this, the simulations are ran using a light curve, which modifies the normalization of the flux accordingly. In order to get the correct time dependence, an orientation file is also used. These files are available on wasabi, and they can be downloaded as follows:
+The background simulations include the time variation from the changing geomagnetic cutoff within the orbit. To accomplish this, the simulations are ran using a light curve, which modifies the normalization of the flux accordingly (for each respective component). In order to get the correct time dependence, an orientation file is also used. These files are available on wasabi, and they can be downloaded as follows:
 
 You'll need awscli:
 pip install awscli 
