@@ -1,0 +1,30 @@
+# Global Parameters
+Version                     1
+Geometry                   /Users/eneights/software/COSItools/massmodels/massmodel-cosi-smex-v8/COSISMEX.geo.setup
+
+# Physics list
+PhysicsListEM               LivermorePol
+
+# Output formats
+StoreSimulationInfo         init-only
+
+# Run and source parameters
+Run                         GRBSim
+GRBSim.FileName             GRB090227772
+GRBSim.Time                 1000.0
+GRBSim.OrientationSky       Galactic File NoLoop 20280301.ori
+GRBSim.Source               GRB090227772
+GRB090227772.ParticleType   1
+GRB090227772.Beam           FarFieldPointSource 0 0
+
+# Orientation: Latitude b [deg], Longitude l [deg]
+GRB090227772.Orientation    Galactic Fixed 20.000 230.000
+
+# Comptonized Spectrum parameters: Flux integration min and max energies, alpha, epeak
+GRB090227772.Spectrum       Comptonized 10.0 5000.0 -0.5210524 2184.11
+
+# Average photon flux, in photon/cm2/s, for a Comptonized model fit to a single spectrum over the duration of the burst.
+GRB090227772.Flux           279.1897
+
+# GBM Light Curve.
+GRB090227772.Lightcurve     File false GRB090227772.dat
