@@ -105,7 +105,7 @@ def write_parallel(args):
     if args == 2:
         f.write('this_run = int(sys.argv[1]) + int(sys.argv[2])\n')
     f.write('this_dir = "Simulations/sim_%s" %this_run\n')
-    f.write('os.system("scp run_sims.py inputs.yaml %s" %this_dir\n')
+    f.write('os.system("scp run_sims.py inputs.yaml %s" %this_dir)\n')
     f.write('os.chdir(this_dir)\n')
     f.write('os.system("python run_sims.py")')
     f.close()
