@@ -1,1 +1,1 @@
-Mass models are available on COSITools. 
+Mass models are available in COSITools. 
