@@ -1,5 +1,15 @@
-The activation simulations include the time variation from the changing geomagnetic cutoff within the orbit. To accomplish this, the simulations are ran using a light curve, which modifies the normalization of the flux accordingly. In order to get the correct time dependence, an orientation file is also used. However, the change in flux was too small to be noticed in the simulated data. Contact the COSI team if you need the light curve files. Otherwise, the simulations can also be ran without them.
+We used a total exposure time of 3 months.
+For the irradiation time in step 2 of the simulations we used 1 year.
+Thus, our background estimates correspond to 3 months of exposure at a rate for an irradiation time of 1 year.
 
-We used a total exposure time of 3 months. 
-For the irradiation time in step 2 of the simulations we used 1 year.  
-Thus, our background estimates correspond to 3 months of exposure at a rate for an irradiation time of 1 year. 
+The activation simulations include the time variation from the changing geomagnetic cutoff within the orbit. To accomplish this, the simulations are ran using a light curve, which modifies the normalization of the flux accordingly. In order to get the correct time dependence, an orientation file is also used. These files are available on wasabi, and they can be downloaded as follows:
+
+You'll need awscli:
+pip install awscli 
+
+To download orientation file: 
+AWS_ACCESS_KEY_ID=GBAL6XATQZNRV3GFH9Y4 AWS_SECRET_ACCESS_KEY=GToOczY5hGX3sketNO2fUwiq4DJoewzIgvTCHoOv aws s3api get-object  --bucket cosi-pipeline-public --key COSI-SMEX/DC2/Data/Orientation/20280301_3month_15sbin_bkg.ori --endpoint-url=https://s3.us-west-1.wasabisys.com 20280301_3month_15sbin_bkg.ori
+
+To download light curve files run:
+python get_bg_lc.py
+
