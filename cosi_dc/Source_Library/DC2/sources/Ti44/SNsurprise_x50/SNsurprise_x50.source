@@ -1,0 +1,7 @@
+DataChallenge.Source		    SNsurprise_x50
+SNsurprise_x50.ParticleType               1
+SNsurprise_x50.Beam                       FarFieldPointSource 0 0
+SNsurprise_x50.Orientation                Galactic Fixed -8.95860329 199.78723619
+SNsurprise_x50.Spectrum                   Gaussian 1157.02 8.2 3
+SNsurprise_x50.Flux                       0.0050
+SNsurprise_x50.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat
