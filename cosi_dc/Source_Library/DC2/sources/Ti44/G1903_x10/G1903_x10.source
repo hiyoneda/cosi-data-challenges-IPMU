@@ -1,0 +1,7 @@
+DataChallenge.Source		    G1903_x10
+G1903_x10.ParticleType               1
+G1903_x10.Beam                       FarFieldPointSource 0 0
+G1903_x10.Orientation                Galactic Fixed 0.3 1.9
+G1903_x10.Spectrum                   Gaussian 1157.02 8.2 3
+G1903_x10.Flux                       0.00050
+G1903_x10.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat

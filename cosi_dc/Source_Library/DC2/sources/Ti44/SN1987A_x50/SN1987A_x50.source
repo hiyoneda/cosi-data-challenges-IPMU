@@ -1,0 +1,7 @@
+DataChallenge.Source		    SN1987A_x50
+SN1987A_x50.ParticleType               1
+SN1987A_x50.Beam                       FarFieldPointSource 0 0
+SN1987A_x50.Orientation                Galactic Fixed -31.9 279.7
+SN1987A_x50.Spectrum                   Gaussian 1157.02 8.2 3
+SN1987A_x50.Flux                       0.00075
+SN1987A.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat

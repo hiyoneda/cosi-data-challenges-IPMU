@@ -1,0 +1,7 @@
+DataChallenge.Source		    CasA
+CasA.ParticleType               1
+CasA.Beam                       FarFieldPointSource 0 0
+CasA.Orientation                Galactic Fixed -2.129570 111.734745
+CasA.Spectrum                   Gaussian 1157.02 8.2 3
+CasA.Flux                       0.00035
+CasA.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat
