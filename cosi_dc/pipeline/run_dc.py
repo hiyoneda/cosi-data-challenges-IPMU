@@ -935,7 +935,7 @@ class RunDataChallenge:
         plt.grid(lw=1,ls="--",color="grey",alpha=0.3)
         plt.xlim(179.5,-179.5)
 
-        plt.savefig("sim_image.png",bbox_inches='tight')
+        plt.savefig("Output/sim_image.png",bbox_inches='tight')
         if show_plots == True:
             plt.show()
 
