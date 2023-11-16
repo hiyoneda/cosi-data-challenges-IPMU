@@ -5,13 +5,13 @@ CentralPointSource511.ParticleType       1
 CentralPointSource511.Beam               FarFieldPointSource 0 0
 CentralPointSource511.Orientation	 Galactic Fixed 0 0
 CentralPointSource511.Spectrum           Gaussian 511 0.85 3
-CentralPointSource511.Flux               0.00012
+CentralPointSource511.Flux               1e-2
 CentralPointSource511.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat
 
 DataChallenge.Source NarrowGaussian511
 NarrowGaussian511.ParticleType           1
-NarrowGaussian511.Beam                   FarFieldGaussian 0 0 4
+NarrowGaussian511.Beam                   FarFieldGaussian 0 0 5.0
 NarrowGaussian511.Orientation            Galactic Fixed -1.25 -0.25
 NarrowGaussian511.Spectrum               Gaussian 511 0.85 3
-NarrowGaussian511.Flux                   0.00028
+NarrowGaussian511.Flux                   4e-2
 NarrowGaussian511.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat
