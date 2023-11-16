@@ -33,8 +33,11 @@ DC2/sources/511/511_ThickDisk <br />
 DC2/sources/511/511_ThinDisk <br />
 DC2/sources/511/511_ThickDiskx10 <br />
 DC2/sources/511/511_ThinDiskx10 <br />
+DC2/sources/511/511_Testing <br />
 DC2/sources/Al26/Al26_R5000_z0200_M30 <br />
 DC2/sources/Al26/Al26_R5000_z1000_M60 <br />
+DC2/sources/Al26/Al26_R5000_z0200_M30_10xflux <br />
+DC2/sources/Al26/Al26_R5000_z1000_M60_10xflux <br />
 DC2/sources/Ti44/CasA <br />
 DC2/sources/Ti44/CasA_x50 <br />
 DC2/sources/Ti44/G1903 <br />
