@@ -328,8 +328,7 @@ class RunDataChallenge:
             stop = self.num_sims+1
         for i in range(start,stop):
             print()
-            print("checking sim " + str(i))
-            print()
+
             this_file = "Simulations/sim_%s/Output/%s" %(str(i),input_file)
             
             # Make sure the file exists:
@@ -577,7 +576,7 @@ class RunDataChallenge:
         return
 
     def check_revan_parallel(self, show_plot=True, input_file="revan_terminal_output.txt", 
-            savefile="revan_events", start=0):
+            savefile="revan_events", start=0, stop=None):
 
         """
         Check that all revan jobs converged, and get number of events.
@@ -588,6 +587,8 @@ class RunDataChallenge:
         savefile: name of output array file and plot pdf. 
         start: staring integer for iterating through sim files. 
             - default is 0. 
+        stop: ending integer for iterating through files.
+            - default is total number of sims.
         """
 
         print()
@@ -596,7 +597,11 @@ class RunDataChallenge:
     
         event_list = []
         problem_list = []
-        for i in range(start,self.num_sims+1):
+        
+        if stop == None:
+            stop = self.num_sims+1
+        
+        for i in range(start,stop):
             print()
             print("checking sim " + str(i))
             print()
