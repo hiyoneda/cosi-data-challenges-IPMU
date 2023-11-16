@@ -107,13 +107,13 @@ class RunDataChallenge:
             shutil.rmtree("Output")
         os.system("mkdir Output")
 
-        # Move orientation file if running parallel jobs:
+        # Copy orientation file if running parallel jobs:
         if os.path.exists("GalacticScan.ori"):
-            os.system("mv GalacticScan.ori Output")
+            os.system("scp GalacticScan.ori Output")
         
-        # Also need to move LC file for parallel jobs:
+        # Also need to copy LC file for parallel jobs:
         if self.lightcurve == True:
-            os.system("mv lightcurve.dat Output")
+            os.system("scp lightcurve.dat Output")
 
         # Need to update name of orientation file if running parallel time sims:
         if self.parallel_time_sims == True:
@@ -808,6 +808,136 @@ class RunDataChallenge:
 
         # Go home:
         os.chdir(self.home)
+
+        return
+
+    def plot_spectrum(self, show_plots=True):
+
+        """
+        Plots extracted mimrec spectrum.
+
+        show_plots: Option to not show plot (True or False). 
+        """
+
+        #setup figure:
+        fig = plt.figure(figsize=(9,6))
+        ax = plt.gca()
+
+        #plot prompt:
+        spec = "Output/extracted_spectrum.dat"
+        df = pd.read_csv(spec,delim_whitespace=True)
+        e = df["EC[keV]"]
+        e_width = df["BW[keV]"]
+        r = df["src_ct/keV"]
+        r_err = np.sqrt(r*e_width)/e_width
+        
+        plt.loglog(e,r,color="black",marker="",ms=8,ls="-",label="crab")
+        plt.errorbar(e,r,yerr=r_err,color="black",marker="",ms=8,ls="-",label="_nolabel_")
+
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.xlabel("Energy [keV]", fontsize=14)
+        plt.ylabel("counts/keV", fontsize=14)
+        plt.xlim(1e2,10e3)
+        plt.grid(color="grey",alpha=0.3,ls="--")
+        plt.savefig("Output/spectra.pdf")
+        if show_plots == True:
+            plt.show()
+        plt.close()
+
+        return
+
+    def plot_lc(self, normed_time=True, show_plots=True):
+
+        """
+        Plots extracted mimrec light curve.
+
+        normed_time: normalize the time to the initial time. 
+            - Default is True.
+            - If False, true time will be shown.
+        
+        show_plots: Option to not show plot (True or False).
+        """
+        
+        #setup figure:
+        fig = plt.figure(figsize=(9,6))
+        ax = plt.gca()
+
+        # Plot prompt diffuse:
+        lc = "Output/extracted_lc.dat"
+        df = pd.read_csv(lc,delim_whitespace=True)
+        t = df["t_center[s]"]
+        if normed_time == True:
+            t = (t - t[0])
+        r = df["ct/s"]
+        plt.semilogy(t,r,color="black",alpha=1,zorder=0,label="cosmic photons")
+
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.xlabel("Time  [s]", fontsize=14)
+        plt.ylabel("Rate [Hz]", fontsize=14)
+        plt.grid(color="grey",alpha=0.3,ls="--")
+        plt.savefig("Output/LCs.pdf")
+        if show_plots == True:
+            plt.show()
+        plt.close()
+
+    def plot_image(self, show_plots=True):
+
+        """
+        Plots mimrec image.
+
+        show_plots: Option to not show plot (True or False).
+        """
+
+        # Upload data:
+        df = pd.read_csv("Output/extracted_image.dat",delim_whitespace=True)
+
+        x = df["Phi_center[deg]"]
+        y = df["Theta_center[deg]"]
+        z = df["Intensity[a.u.]"]
+
+        # Binning for all-sky map, in Galactic coordinates.
+        # This needs to match the mimrec output.
+        # Note: I need to update this to get the correct binning automatically. 
+        x_range = np.arange(-177,183,6)
+        y_range = np.arange(-88.5,91.5,3)
+
+        # Convert z data into array:
+        array_list = []
+        for each in x_range:
+            this_column_index = x == each
+            this_column = z[this_column_index]
+            array_list.append(this_column)
+        array_list = np.array(array_list)
+
+        # Setup figure:
+        fig = plt.figure(figsize=(12,6))
+        ax = plt.gca()
+
+        # Plot:
+        img = ax.pcolormesh(np.flip(x_range),y_range,array_list.T,cmap="cubehelix",vmin=0,vmax=1,shading=None)
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
+
+        cbar = plt.colorbar(img,fraction=0.045)
+        cbar.set_label("Intensity [a.u.]",size=16,labelpad=12)
+        cbar.ax.tick_params(labelsize=12)
+
+        plt.ylabel('Galactic Latitude [$\circ$]',fontsize=18)
+        plt.xlabel('Galactic Longitude [$\circ$]',fontsize=18)
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
+
+        ax.tick_params(axis='both',which='major',length=9)
+        ax.tick_params(axis='both',which='minor',length=5)
+
+        plt.grid(lw=1,ls="--",color="grey",alpha=0.3)
+        plt.xlim(179.5,-179.5)
+
+        plt.savefig("sim_image.png",bbox_inches='tight')
+        if show_plots == True:
+            plt.show()
 
         return
 
