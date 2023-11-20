@@ -811,19 +811,21 @@ class RunDataChallenge:
 
         return
 
-    def plot_spectrum(self, show_plots=True):
+    def plot_spectrum(self, show_plots=True, exp_time=None):
 
         """
         Plots extracted mimrec spectrum.
 
         show_plots: Option to not show plot (True or False). 
+
+        exp_time: exposure time in seconds. 
         """
 
-        #setup figure:
+        # Setup figure:
         fig = plt.figure(figsize=(9,6))
         ax = plt.gca()
 
-        #plot prompt:
+        # Plot prompt:
         spec = "Output/extracted_spectrum.dat"
         df = pd.read_csv(spec,delim_whitespace=True)
         e = df["EC[keV]"]
@@ -831,6 +833,11 @@ class RunDataChallenge:
         r = df["src_ct/keV"]
         r_err = np.sqrt(r*e_width)/e_width
         
+        # Option to divide by exposure time:
+        if exp_time != None:
+            r = r/exp_time
+            r_err = r_err/exp_time
+
         plt.loglog(e,r,color="black",marker="",ms=8,ls="-",label="crab")
         plt.errorbar(e,r,yerr=r_err,color="black",marker="",ms=8,ls="-",label="_nolabel_")
 
@@ -838,6 +845,8 @@ class RunDataChallenge:
         plt.yticks(fontsize=12)
         plt.xlabel("Energy [keV]", fontsize=14)
         plt.ylabel("counts/keV", fontsize=14)
+        if exp_time != None:
+            plt.ylabel("counts/keV/s", fontsize=14)
         plt.xlim(1e2,10e3)
         plt.grid(color="grey",alpha=0.3,ls="--")
         plt.savefig("Output/spectra.pdf")
@@ -859,7 +868,7 @@ class RunDataChallenge:
         show_plots: Option to not show plot (True or False).
         """
         
-        #setup figure:
+        # Setup figure:
         fig = plt.figure(figsize=(9,6))
         ax = plt.gca()
 
