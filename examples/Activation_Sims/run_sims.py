@@ -6,9 +6,6 @@ from cosi_dc.pipeline.run_dc import RunDataChallenge
 instance = RunDataChallenge("inputs.yaml")
 
 # Generate source files:
-# The source files are available in the DC2 source library: 
-# https://github.com/cositools/cosi-data-challenges/tree/main/cosi_dc/Source_Library/DC2/backgrounds
-# They are generated using the cosi-background class,
 # For steps 1 and 3, set the exposure time to the max time in the ori/LC files. 
 # For step 2, set the irradiation time to your preference (we use 1 yr for DC2).
 # The genaric name for the LC is lightcurve.dat,
