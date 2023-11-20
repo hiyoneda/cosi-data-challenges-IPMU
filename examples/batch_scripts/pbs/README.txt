@@ -7,7 +7,7 @@ without manually specifying multiple CPUs
 per node. In this case, a single job will run
 on a single node, using only 1 cpu. Generally,
 this is a waste of CPUs. However, many clusters
-have special paritions that will automatically send 
+have special partitions that will automatically send 
 jobs of an array to individual CPUs by default, which
 makes things very convenient. See the slurm directory 
 for some specific examples. This script can also be 
@@ -20,7 +20,7 @@ Use this for single chunks, i.e. when each
 job in the array is perfomed on a single node.
 
 array_job_sequence.sh:
-Use this when running an array job over multiple nodes. 
+Use this when running an array job over multiple nodes with gnu_parallel. 
 The script parallel.py needs to be modified to only take sys.argv[1],
 i.e. remove sys.argv[2].
 
