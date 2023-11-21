@@ -39,7 +39,7 @@ BroadGaussian511.Beam                    FarFieldGaussian 0 0 8.7
 BroadGaussian511.Orientation             Galactic Fixed 0 0
 BroadGaussian511.Spectrum                Gaussian 511 0.85 3
 BroadGaussian511.Flux                    0.00073
-NarrowGaussianOPs.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat
+BroadGaussian511.FarFieldTransmissionProbability  TP_Earth_occultation_550km_zenith_pointing.dat
 
 DataChallenge.Source BroadGaussianOPs
 BroadGaussianOPs.ParticleType            1
