@@ -50,6 +50,3 @@ See Source_Library for available sources. Let us know if you want any specific s
   - The example directory contains different batch scripts. 
 
 </pre>
-
-## Bug report <br />
-* The number of iterations in ExtractImage.cxx needs to be changed manually if using a different value than the default (20). Specifically, this is at lines 8 and 10. For x iterations: 20 --> x and 22 --> x+2. This will be automated soon.  
